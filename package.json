@@ -1,0 +1,49 @@
+{
+  "name": "shelly-language-support",
+  "displayName": "Shelly Language Support",
+  "description": "VS Code language support for Shelly .shelly scripts.",
+  "version": "0.0.1",
+  "publisher": "soyagvs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Soyagvs/shelly-vscode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Soyagvs/shelly-vscode/issues"
+  },
+  "homepage": "https://github.com/Soyagvs/shelly-vscode#readme",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "shelly",
+    "language",
+    "syntax",
+    "highlighting"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "shelly",
+        "aliases": [
+          "Shelly"
+        ],
+        "extensions": [
+          ".shelly"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "shelly",
+        "scopeName": "source.shelly",
+        "path": "./syntaxes/shelly.tmLanguage.json"
+      }
+    ]
+  }
+}

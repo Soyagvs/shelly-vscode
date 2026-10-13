@@ -1,0 +1,183 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Shelly",
+  "scopeName": "source.shelly",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#variables"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#builtins"
+    },
+    {
+      "include": "#booleans"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#arrows"
+    },
+    {
+      "include": "#operators"
+    },
+    {
+      "include": "#selectors"
+    },
+    {
+      "include": "#brackets"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.block.number-sign.shelly",
+          "begin": "#",
+          "end": "#",
+          "patterns": []
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.shelly",
+          "begin": "\\\"",
+          "end": "\\\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.shelly",
+              "match": "\\\\(?:[\\\\\"nrt]|x[0-9A-Fa-f]{2}|u\\{[0-9A-Fa-f]+\\})"
+            },
+            {
+              "name": "variable.other.constant.interpolation.shelly",
+              "match": "\\$\\$[A-Z][A-Z0-9_]*"
+            },
+            {
+              "name": "variable.other.interpolation.shelly",
+              "match": "\\$[A-Za-z][A-Za-z0-9_]*(?:\\[[^\\]\\r\\n]*\\])?"
+            }
+          ]
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "variable.other.constant.shelly",
+          "match": "\\$\\$[A-Z][A-Z0-9_]*\\b"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other.shelly",
+          "match": "\\$[A-Za-z][A-Za-z0-9_]*\\b"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.shelly",
+          "match": "\\b(?:fn|end|if|elif|else|repeat|while|for|in|call|return|break|continue|and|or|not|global|export|import|include|exit)\\b"
+        }
+      ]
+    },
+    "builtins": {
+      "patterns": [
+        {
+          "name": "support.function.builtin.shelly",
+          "match": "\\b(?:shellout|shellin|ask|command|append|prepend|remove)\\b"
+        }
+      ]
+    },
+    "booleans": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.shelly",
+          "match": "\\b(?:true|false)\\b"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.shelly",
+          "match": "(?<![A-Za-z0-9_])[-+]?(?:\\d+\\.\\d+|\\d+)(?![A-Za-z0-9_])"
+        }
+      ]
+    },
+    "arrows": {
+      "patterns": [
+        {
+          "name": "keyword.operator.arrow.shelly",
+          "match": "->"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.shelly",
+          "match": "==|!=|>=|<=|\\.\\.|[=+*/<>-]"
+        }
+      ]
+    },
+    "selectors": {
+      "patterns": [
+        {
+          "name": "meta.selector.list.shelly",
+          "begin": "\\[",
+          "end": "\\]",
+          "patterns": [
+            {
+              "include": "#strings"
+            },
+            {
+              "include": "#constants"
+            },
+            {
+              "include": "#variables"
+            },
+            {
+              "include": "#numbers"
+            },
+            {
+              "include": "#booleans"
+            },
+            {
+              "include": "#operators"
+            },
+            {
+              "name": "constant.language.selector.shelly",
+              "match": "\\b(?:first|last)\\b"
+            }
+          ]
+        }
+      ]
+    },
+    "brackets": {
+      "patterns": [
+        {
+          "name": "punctuation.definition.bracket.shelly",
+          "match": "[\\[\\]{}()]"
+        }
+      ]
+    }
+  }
+}
