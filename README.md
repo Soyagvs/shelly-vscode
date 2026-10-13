@@ -7,20 +7,25 @@ This repository is separate from the Shelly runtime so users can clone, test, in
 ## Features
 
 - Registers the `shelly` language for `.shelly` files.
-- Adds TextMate syntax highlighting for comments, strings, variables, constants, keywords, built-ins, numbers, operators, arrows, and list selectors.
+- Adds TextMate syntax highlighting for comments, one-line and multiline strings, variables, constants, keywords, built-ins, numbers, operators, arrows, dictionaries, nested access, and list selectors.
 - Adds bracket, comment, folding, auto-closing, surrounding-pair, and simple indentation configuration.
 - Shows diagnostics from `shelly check --format json` when a compatible Shelly runtime is installed.
 
+
+## Shelly v3.1 syntax coverage
+
+Highlighting includes current Shelly syntax such as `arg`, `hasArg`, `args`, `case` / `when`, `try` / `catch`, `log`, file helpers, JSON helpers, dictionaries, nested list/dictionary access, and triple-backtick multiline strings.
+
 ## Install from GitHub Releases
 
-Download `shelly-language-support-0.0.2.vsix` from the latest release:
+Download `shelly-language-support-0.0.3.vsix` from the latest release:
 
 <https://github.com/Soyagvs/shelly-vscode/releases/latest>
 
 Then install it with VS Code:
 
 ```sh
-code --install-extension shelly-language-support-0.0.2.vsix
+code --install-extension shelly-language-support-0.0.3.vsix
 ```
 
 Reload VS Code and open a `.shelly` file. The language mode in the bottom-right corner should say `Shelly`.
@@ -46,7 +51,7 @@ Install dependencies and build the `.vsix` package:
 ```sh
 npm install
 npm run package
-code --install-extension shelly-language-support-0.0.2.vsix
+code --install-extension shelly-language-support-0.0.3.vsix
 ```
 
 ## Diagnostics

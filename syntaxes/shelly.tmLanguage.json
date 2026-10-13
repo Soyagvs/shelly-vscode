@@ -54,21 +54,36 @@
     "strings": {
       "patterns": [
         {
+          "name": "string.quoted.triple-backtick.shelly",
+          "begin": "```",
+          "end": "```",
+          "patterns": [
+            {
+              "name": "variable.other.constant.interpolation.shelly",
+              "match": "\\$\\$[A-Z][A-Z0-9_]*(?:\\[[^\\]\\r\\n]*\\]|\\.[A-Za-z][A-Za-z0-9_]*)*"
+            },
+            {
+              "name": "variable.other.interpolation.shelly",
+              "match": "\\$[A-Za-z][A-Za-z0-9_]*(?:\\[[^\\]\\r\\n]*\\]|\\.[A-Za-z][A-Za-z0-9_]*)*"
+            }
+          ]
+        },
+        {
           "name": "string.quoted.double.shelly",
           "begin": "\\\"",
           "end": "\\\"",
           "patterns": [
             {
               "name": "constant.character.escape.shelly",
-              "match": "\\\\(?:[\\\\\"nrt]|x[0-9A-Fa-f]{2}|u\\{[0-9A-Fa-f]+\\})"
+              "match": "\\\\(?:[\\\\\\\"nrt]|x[0-9A-Fa-f]{2}|u\\{[0-9A-Fa-f]+\\})"
             },
             {
               "name": "variable.other.constant.interpolation.shelly",
-              "match": "\\$\\$[A-Z][A-Z0-9_]*"
+              "match": "\\$\\$[A-Z][A-Z0-9_]*(?:\\[[^\\]\\r\\n]*\\]|\\.[A-Za-z][A-Za-z0-9_]*)*"
             },
             {
               "name": "variable.other.interpolation.shelly",
-              "match": "\\$[A-Za-z][A-Za-z0-9_]*(?:\\[[^\\]\\r\\n]*\\])?"
+              "match": "\\$[A-Za-z][A-Za-z0-9_]*(?:\\[[^\\]\\r\\n]*\\]|\\.[A-Za-z][A-Za-z0-9_]*)*"
             }
           ]
         }
@@ -86,7 +101,7 @@
       "patterns": [
         {
           "name": "variable.other.shelly",
-          "match": "\\$[A-Za-z][A-Za-z0-9_]*\\b"
+          "match": "\\$[A-Za-z][A-Za-z0-9_]*(?:\\[[^\\]\\r\\n]*\\]|\\.[A-Za-z][A-Za-z0-9_]*)*\\b"
         }
       ]
     },
@@ -94,7 +109,7 @@
       "patterns": [
         {
           "name": "keyword.control.shelly",
-          "match": "\\b(?:fn|end|if|elif|else|repeat|while|for|in|call|return|break|continue|and|or|not|global|export|import|include|exit)\\b"
+          "match": "\\b(?:fn|end|if|elif|else|case|when|repeat|while|for|in|try|catch|log|call|return|break|continue|and|or|not|global|export|import|include|exit)\\b"
         }
       ]
     },
@@ -102,7 +117,7 @@
       "patterns": [
         {
           "name": "support.function.builtin.shelly",
-          "match": "\\b(?:shellout|shellin|ask|command|append|prepend|remove)\\b"
+          "match": "\\b(?:shellout|shellin|ask|choose|command|arg|hasArg|args|exists|contains|files|create|copy|move|rename|remove|read|write|append|prepend|isFile|isDir|tempFile|tempDir|size|trim|lower|upper|replace|split|startsWith|endsWith|len|join|sort|reverse|unique|toNumber|toString|isEmpty|isNumber|isText|isList|isDict|keys|values|jsonParse|jsonStringify|basename|dirname|extension|withoutExtension|now|today|random|randomInt)\\b"
         }
       ]
     },
