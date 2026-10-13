@@ -2,7 +2,7 @@
   "name": "shelly-language-support",
   "displayName": "Shelly Language Support",
   "description": "VS Code language support for Shelly .shelly scripts.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "soyagvs",
   "license": "MIT",
   "repository": {
@@ -28,11 +28,15 @@
   "files": [
     "language-configuration.json",
     "syntaxes/shelly.tmLanguage.json",
+    "src/extension.js",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
-    "package": "npx @vscode/vsce package --no-dependencies"
+    "package": "npx @vscode/vsce package --no-dependencies",
+    "compile": "npm run build",
+    "build": "node --check src/extension.js",
+    "validate": "node -e \"JSON.parse(require('fs').readFileSync('package.json','utf8')); JSON.parse(require('fs').readFileSync('syntaxes/shelly.tmLanguage.json','utf8'))\""
   },
   "devDependencies": {
     "@vscode/vsce": "^4.0.0"
@@ -57,5 +61,9 @@
         "path": "./syntaxes/shelly.tmLanguage.json"
       }
     ]
-  }
+  },
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onLanguage:shelly"
+  ]
 }

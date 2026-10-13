@@ -9,20 +9,23 @@ This repository is separate from the Shelly runtime so users can clone, test, in
 - Registers the `shelly` language for `.shelly` files.
 - Adds TextMate syntax highlighting for comments, strings, variables, constants, keywords, built-ins, numbers, operators, arrows, and list selectors.
 - Adds bracket, comment, folding, auto-closing, surrounding-pair, and simple indentation configuration.
+- Shows diagnostics from `shelly check --format json` when a compatible Shelly runtime is installed.
 
 ## Install from GitHub Releases
 
-Download `shelly-language-support-0.0.1.vsix` from the latest release:
+Download `shelly-language-support-0.0.2.vsix` from the latest release:
 
 <https://github.com/Soyagvs/shelly-vscode/releases/latest>
 
 Then install it with VS Code:
 
 ```sh
-code --install-extension shelly-language-support-0.0.1.vsix
+code --install-extension shelly-language-support-0.0.2.vsix
 ```
 
 Reload VS Code and open a `.shelly` file. The language mode in the bottom-right corner should say `Shelly`.
+
+Diagnostics require a Shelly runtime version that provides `shelly check --format json <file>` on your `PATH`. If the command is missing or fails without JSON output, the extension reports a single warning diagnostic instead of crashing.
 
 ## Try it in development mode
 
@@ -43,18 +46,18 @@ Install dependencies and build the `.vsix` package:
 ```sh
 npm install
 npm run package
-code --install-extension shelly-language-support-0.0.1.vsix
+code --install-extension shelly-language-support-0.0.2.vsix
 ```
 
-## Diagnostics roadmap
+## Diagnostics
 
-Syntax highlighting is the first step. Real error markers should come from a safe Shelly checker command, for example:
+When a `.shelly` file is opened, saved, or edited, the extension runs:
 
 ```sh
-shelly check path/to/file.shelly
+shelly check --format json path/to/file.shelly
 ```
 
-That command should parse and validate scripts without executing `command`, `shellout`, or any other side-effecting code. Once Shelly exposes that checker, this extension can call it and show diagnostics in VS Code.
+The checker must return JSON diagnostics with `file`, `line`, `column`, `severity`, and `message` fields. Change-triggered checks are debounced so the checker is not launched immediately on every keystroke.
 
 ## Related
 
