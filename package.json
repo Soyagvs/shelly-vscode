@@ -25,6 +25,18 @@
     "syntax",
     "highlighting"
   ],
+  "files": [
+    "language-configuration.json",
+    "syntaxes/shelly.tmLanguage.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "package": "npx @vscode/vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^4.0.0"
+  },
   "contributes": {
     "languages": [
       {

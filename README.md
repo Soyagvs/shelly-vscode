@@ -10,7 +10,21 @@ This repository is separate from the Shelly runtime so users can clone, test, in
 - Adds TextMate syntax highlighting for comments, strings, variables, constants, keywords, built-ins, numbers, operators, arrows, and list selectors.
 - Adds bracket, comment, folding, auto-closing, surrounding-pair, and simple indentation configuration.
 
-## Try it like a user
+## Install from GitHub Releases
+
+Download `shelly-language-support-0.0.1.vsix` from the latest release:
+
+<https://github.com/Soyagvs/shelly-vscode/releases/latest>
+
+Then install it with VS Code:
+
+```sh
+code --install-extension shelly-language-support-0.0.1.vsix
+```
+
+Reload VS Code and open a `.shelly` file. The language mode in the bottom-right corner should say `Shelly`.
+
+## Try it in development mode
 
 Clone this repository and open it in VS Code:
 
@@ -20,18 +34,15 @@ cd shelly-vscode
 code .
 ```
 
-Then press `F5` and choose the Extension Development Host.
+Open the Run and Debug panel, choose `Run Shelly Extension`, and start it. In the new VS Code window, open any `.shelly` file.
 
-In the new VS Code window, open any `.shelly` file. The file should be detected as Shelly and receive syntax highlighting.
+## Package locally
 
-## Local install
-
-For a one-off local install, copy or symlink this folder into your VS Code extensions directory and reload VS Code.
-
-To package it first, install `vsce` separately, then run from this directory:
+Install dependencies and build the `.vsix` package:
 
 ```sh
-vsce package
+npm install
+npm run package
 code --install-extension shelly-language-support-0.0.1.vsix
 ```
 
