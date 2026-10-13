@@ -2,7 +2,7 @@
   "name": "shelly-language-support",
   "displayName": "Shelly Language Support",
   "description": "VS Code language support for Shelly .shelly scripts.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "soyagvs",
   "license": "MIT",
   "repository": {
