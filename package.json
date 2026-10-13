@@ -2,7 +2,7 @@
   "name": "shelly-language-support",
   "displayName": "Shelly Language Support",
   "description": "VS Code language support for Shelly .shelly scripts.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "soyagvs",
   "license": "MIT",
   "repository": {
@@ -30,7 +30,9 @@
     "syntaxes/shelly.tmLanguage.json",
     "src/extension.js",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "icons/shelly.svg",
+    "icon-themes/shelly-icon-theme.json"
   ],
   "scripts": {
     "package": "npx @vscode/vsce package --no-dependencies",
@@ -59,6 +61,13 @@
         "language": "shelly",
         "scopeName": "source.shelly",
         "path": "./syntaxes/shelly.tmLanguage.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "shelly-icons",
+        "label": "Shelly Icons",
+        "path": "./icon-themes/shelly-icon-theme.json"
       }
     ]
   },

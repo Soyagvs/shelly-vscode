@@ -1,0 +1,13 @@
+{
+  "iconDefinitions": {
+    "_shelly": {
+      "iconPath": "../icons/shelly.svg"
+    }
+  },
+  "fileExtensions": {
+    "shelly": "_shelly"
+  },
+  "languageIds": {
+    "shelly": "_shelly"
+  }
+}
