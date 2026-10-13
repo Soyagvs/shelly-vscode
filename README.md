@@ -20,16 +20,18 @@ This extension ships a `Shelly Icons` file icon theme that maps `.shelly` files 
 
 Highlighting includes current Shelly syntax such as `arg`, `hasArg`, `args`, `case` / `when`, `try` / `catch`, `log`, file helpers, JSON helpers, dictionaries, nested list/dictionary access, and triple-backtick multiline strings.
 
-## Install from GitHub Releases
+## Latest release
 
-Download `shelly-language-support-0.0.4.vsix` from the latest release:
+Current version: **v0.0.5**
+
+Download `shelly-language-support-0.0.5.vsix` from the latest release:
 
 <https://github.com/Soyagvs/shelly-vscode/releases/latest>
 
 Then install it with VS Code:
 
 ```sh
-code --install-extension shelly-language-support-0.0.4.vsix
+code --install-extension shelly-language-support-0.0.5.vsix
 ```
 
 Reload VS Code and open a `.shelly` file. The language mode in the bottom-right corner should say `Shelly`.
@@ -55,7 +57,7 @@ Install dependencies and build the `.vsix` package:
 ```sh
 npm install
 npm run package
-code --install-extension shelly-language-support-0.0.4.vsix
+code --install-extension shelly-language-support-0.0.5.vsix
 ```
 
 ## Diagnostics
