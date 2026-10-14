@@ -1,4 +1,4 @@
-# Shelly Language Support for VS Code
+# Shelly Language Oficial for VS Code
 
 VS Code language support for `.shelly` scripts.
 
@@ -22,16 +22,16 @@ Highlighting includes current Shelly syntax such as `arg`, `hasArg`, `args`, `ca
 
 ## Latest release
 
-Current version: **v0.0.5**
+Current version: **v0.0.6**
 
-Download `shelly-language-support-0.0.5.vsix` from the latest release:
+Download `shelly-language-oficial-0.0.6.vsix` from the latest release:
 
 <https://github.com/Soyagvs/shelly-vscode/releases/latest>
 
 Then install it with VS Code:
 
 ```sh
-code --install-extension shelly-language-support-0.0.5.vsix
+code --install-extension shelly-language-oficial-0.0.6.vsix
 ```
 
 Reload VS Code and open a `.shelly` file. The language mode in the bottom-right corner should say `Shelly`.
@@ -57,7 +57,7 @@ Install dependencies and build the `.vsix` package:
 ```sh
 npm install
 npm run package
-code --install-extension shelly-language-support-0.0.5.vsix
+code --install-extension shelly-language-oficial-0.0.6.vsix
 ```
 
 ## Diagnostics
