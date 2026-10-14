@@ -1,6 +1,6 @@
 {
-  "name": "shelly-language-support",
-  "displayName": "Shelly Language Support",
+  "name": "shelly-language-oficial",
+  "displayName": "Shelly Language Oficial",
   "description": "VS Code language support for Shelly .shelly scripts.",
   "version": "0.0.6",
   "publisher": "AGUSTINGABRIELMARTINEZ",
