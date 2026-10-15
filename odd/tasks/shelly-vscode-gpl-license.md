@@ -19,6 +19,7 @@ Replace MIT with the unmodified GNU GPL v3 text and declare `GPL-3.0-or-later` i
 
 ## Evidence
 
+- Work-unit commit: `d0ab7f1 chore: relicense extension under GPL`.
 - LICENSE matches the official GNU GPL v3 text (Version 3, 29 June 2007).
 - Package metadata declares `GPL-3.0-or-later`.
 - `git diff --check` passed.
