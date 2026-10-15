@@ -24,3 +24,4 @@ Replace MIT with the unmodified GNU GPL v3 text and declare `GPL-3.0-or-later` i
 - LICENSE matches the official GNU GPL v3 text (Version 3, 29 June 2007).
 - Package metadata declares `GPL-3.0-or-later`.
 - `git diff --check` passed.
+- Documentation commit: `4dafcab docs: document extension GPL license`.
