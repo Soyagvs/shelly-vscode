@@ -73,3 +73,7 @@ The checker must return JSON diagnostics with `file`, `line`, `column`, `severit
 ## Related
 
 - Shelly runtime: <https://github.com/Soyagvs/shelly>
+
+## License
+
+Licensed under the GNU General Public License v3.0 or later. See [LICENSE](LICENSE).

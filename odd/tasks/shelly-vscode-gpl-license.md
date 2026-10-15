@@ -11,6 +11,7 @@ Replace MIT with the unmodified GNU GPL v3 text and declare `GPL-3.0-or-later` i
 - [x] Replace the extension license with the official GPL v3 text.
 - [x] Declare the SPDX license identifier in `package.json`.
 - [x] Verify license text integrity and package metadata.
+- [x] Document GPL-3.0-or-later in README.
 
 ## Constraints
 
