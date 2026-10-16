@@ -1,3 +1,5 @@
+<img width="2056" height="765" alt="Shelly_ Extensión VS Code y Cuervo" src="https://github.com/user-attachments/assets/1d2b8056-d182-42e6-afba-574a78421053" />
+
 # Shelly Language Oficial for VS Code
 
 VS Code language support for `.shelly` scripts.
