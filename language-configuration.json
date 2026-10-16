@@ -78,7 +78,7 @@
     }
   },
   "indentationRules": {
-    "increaseIndentPattern": "^\\s*(fn|if|elif|else|repeat|while|for)\\b(?!.*\\bend\\b).*$",
+    "increaseIndentPattern": "^\\s*(?:\\bfn\\b|\\bif\\b|\\belif\\b|\\belse\\b|\\brepeat\\b|\\bwhile\\b|\\bfor\\b|\\btry\\b|\\bcatch\\b|\\bcase\\b|\\bwhen\\b|\\blog\\b)(?!.*\\bend\\b).*$",
     "decreaseIndentPattern": "^\\s*(elif|else|end)\\b.*$"
   }
 }

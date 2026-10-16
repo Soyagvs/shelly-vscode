@@ -5,6 +5,8 @@ const path = require('node:path');
 
 const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
 const extensionSource = fs.readFileSync(path.join(__dirname, '..', 'src', 'extension.js'), 'utf8');
+const grammar = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'syntaxes', 'shelly.tmLanguage.json'), 'utf8'));
+const languageConfiguration = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'language-configuration.json'), 'utf8'));
 
 test('declares shelly-lsp as the default server path and exposes shelly.serverPath', () => {
   const properties = packageJson.contributes?.configuration?.properties;
@@ -39,4 +41,30 @@ test('surfaces language-server startup failures with an actionable message', () 
   assert.match(extensionSource, /show(Error|Warning)Message\(/);
   assert.match(extensionSource, /shelly-lsp/);
   assert.match(extensionSource, /serverPath|language server/i);
+});
+
+test('includes shell and shellin in builtin grammar rules', () => {
+  const builtins = grammar.repository?.builtins?.patterns ?? [];
+  assert.ok(builtins.some((pattern) => /\\bshell\\b/.test(pattern.match ?? '')));
+  assert.ok(builtins.some((pattern) => /\\bshellin\\b/.test(pattern.match ?? '')));
+});
+
+test('does not define legacy dollar-dollar constant highlighting', () => {
+  const grammarText = JSON.stringify(grammar);
+  assert.doesNotMatch(grammarText, /variable\.other\.constant\.shelly/);
+  assert.doesNotMatch(grammarText, /\\\\\$\\\\\$/);
+});
+
+test('defines dedicated function-name and dictionary-key grammar patterns', () => {
+  assert.ok(grammar.repository?.functionNames, 'missing function-name grammar scope');
+  assert.ok(grammar.repository?.dictionaryKeys, 'missing dictionary-key grammar scope');
+  assert.ok(grammar.patterns.some((pattern) => pattern.include === '#functionNames'));
+  assert.ok(grammar.patterns.some((pattern) => pattern.include === '#dictionaryKeys'));
+});
+
+test('indents all block constructs in language configuration', () => {
+  const increase = languageConfiguration.indentationRules?.increaseIndentPattern ?? '';
+  for (const keyword of ['try', 'catch', 'case', 'when', 'log']) {
+    assert.match(increase, new RegExp(`\\\\b${keyword}\\\\b`));
+  }
 });
