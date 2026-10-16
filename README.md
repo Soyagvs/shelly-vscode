@@ -9,7 +9,7 @@ This repository is separate from the Shelly runtime so users can clone, test, in
 - Registers the `shelly` language for `.shelly` files.
 - Adds TextMate syntax highlighting for comments, one-line and multiline strings, variables, constants, keywords, built-ins, numbers, operators, arrows, dictionaries, nested access, and list selectors.
 - Adds bracket, comment, folding, auto-closing, surrounding-pair, and simple indentation configuration.
-- Shows diagnostics from `shelly check --format json` when a compatible Shelly runtime is installed.
+- Connects `.shelly` files to the Shelly LSP v1 language server for editor language features and diagnostics.
 
 
 ## File icons
@@ -36,7 +36,27 @@ code --install-extension shelly-language-oficial-0.0.6.vsix
 
 Reload VS Code and open a `.shelly` file. The language mode in the bottom-right corner should say `Shelly`.
 
-Diagnostics require a Shelly runtime version that provides `shelly check --format json <file>` on your `PATH`. If the command is missing or fails without JSON output, the extension reports a single warning diagnostic instead of crashing.
+## Shelly LSP integration
+
+The extension starts a Shelly LSP v1 server for file-backed `.shelly` documents and communicates with it over standard input/output. The server supplies the language-server features and diagnostics supported by its v1 implementation. The extension does not execute Shelly scripts; it only starts the language server.
+
+Install the `shelly-lsp` executable separately and make sure it is available on your `PATH`. The extension uses `shelly-lsp` by default. To use a different executable or an absolute path, set `shelly.serverPath` in VS Code settings, for example:
+
+```json
+{
+  "shelly.serverPath": "/path/to/shelly-lsp"
+}
+```
+
+There is currently no formatting support. Use another formatter if you need formatted Shelly source.
+
+### Startup troubleshooting
+
+- Run `shelly-lsp` from a terminal to verify that it is installed and executable.
+- Check that VS Code was started with the same `PATH` that contains `shelly-lsp`; GUI-launched VS Code may not inherit your shell setup.
+- Set `shelly.serverPath` to the full executable path when the command is not on `PATH`.
+- Check **View > Output** and select **Shelly Language Server** for startup and protocol logs.
+- If the server cannot start, the extension shows an actionable error; fixing the path or installation and reloading the window should restart it.
 
 ## Try it in development mode
 
@@ -59,16 +79,6 @@ npm install
 npm run package
 code --install-extension shelly-language-oficial-0.0.6.vsix
 ```
-
-## Diagnostics
-
-When a `.shelly` file is opened, saved, or edited, the extension runs:
-
-```sh
-shelly check --format json path/to/file.shelly
-```
-
-The checker must return JSON diagnostics with `file`, `line`, `column`, `severity`, and `message` fields. Change-triggered checks are debounced so the checker is not launched immediately on every keystroke.
 
 ## Related
 

@@ -40,12 +40,26 @@
     "package": "npx @vscode/vsce package --no-dependencies",
     "compile": "npm run build",
     "build": "node --check src/extension.js",
-    "validate": "node -e \"JSON.parse(require('fs').readFileSync('package.json','utf8')); JSON.parse(require('fs').readFileSync('syntaxes/shelly.tmLanguage.json','utf8'))\""
+    "validate": "node -e \"JSON.parse(require('fs').readFileSync('package.json','utf8')); JSON.parse(require('fs').readFileSync('syntaxes/shelly.tmLanguage.json','utf8'))\"",
+    "test": "node --test test/**/*.test.js"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
   },
   "devDependencies": {
     "@vscode/vsce": "^4.0.0"
   },
   "contributes": {
+    "configuration": {
+      "title": "Shelly",
+      "properties": {
+        "shelly.serverPath": {
+          "type": "string",
+          "default": "shelly-lsp",
+          "description": "Path or command used to start the Shelly language server."
+        }
+      }
+    },
     "languages": [
       {
         "id": "shelly",
