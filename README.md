@@ -72,13 +72,16 @@ Open the Run and Debug panel, choose `Run Shelly Extension`, and start it. In th
 
 ## Package locally
 
-Install dependencies and build the `.vsix` package:
+Install dependencies and build the `.vsix` package (including production runtime dependencies):
 
 ```sh
-npm install
+npm ci
 npm run package
+npm run verify-package
 code --install-extension shelly-language-oficial-0.0.6.vsix
 ```
+
+`npm run verify-package` inspects the resulting VSIX and fails unless the extension client and `vscode-languageclient` runtime entrypoint are present.
 
 ## Related
 

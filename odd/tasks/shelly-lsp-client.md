@@ -15,11 +15,15 @@ Feature: replace file-based checker diagnostics with the Shelly LSP v1 client.
 - [x] Add LSP client contract and RED lifecycle/configuration tests.
 - [x] Replace checker runner with managed stdio language client.
 - [x] Document server installation, configuration, and troubleshooting.
-- [x] Package and verify the extension.
+- [x] Package and verify the extension, including production runtime dependencies.
 
 ## Evidence
 
+- `npm ci`: passed from a clean dependency install.
 - `npm test`: 6 passed.
-- `npm run build`, `npm run validate`, `npm run package`, and `git diff --check`: passed.
+- `npm run build`: passed.
+- `npm run validate`: passed.
+- `npm run package`: passed; production dependencies included.
+- `npm run verify-package`: passed; verified `extension/src/client.js` and `extension/node_modules/vscode-languageclient/lib/node/main.js`.
 - Package artifact: `shelly-language-oficial-0.0.6.vsix`.
 - No commit created; awaiting explicit user authorization.
