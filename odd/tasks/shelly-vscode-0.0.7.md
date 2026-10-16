@@ -18,10 +18,12 @@ Feature: publish the LSP client changes as a new extension version rather than r
 - Development dependency `@vscode/vsce` excluded from the VSIX.
 - `npm run verify-package`: passed; verified the client and required language-client protocol entrypoints.
 - Package artifact: `/home/soyagvs/proyectos/personal/shelly-vscode/shelly-language-oficial-0.0.7.vsix`.
-- No commit, push, tag, GitHub release, or Marketplace publication performed.
+- Committed and pushed as `024f9a0` (`release: prepare VS Code extension 0.0.7`).
+- GitHub tag and release [`v0.0.7`](https://github.com/Soyagvs/shelly-vscode/releases/tag/v0.0.7) created with the verified VSIX attached.
+- Marketplace publication remains user-managed.
 
 ## Tasks
 
 - [x] Update version references to 0.0.7.
 - [x] Build and inspect the 0.0.7 VSIX.
-- [ ] Commit, tag, and create the GitHub release when explicitly requested.
+- [x] Commit, tag, and create the GitHub release.
