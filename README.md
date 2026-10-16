@@ -54,6 +54,8 @@ Install the `shelly-lsp` executable separately and make sure it is available on 
 
 There is currently no formatting support. Use another formatter if you need formatted Shelly source.
 
+Language helper semantics and date formats are documented in the [canonical Shelly helper docs](https://github.com/Soyagvs/shelly/blob/main/docs/helpers.md) and [date-formatting docs](https://github.com/Soyagvs/shelly/blob/main/docs/date-formatting.md).
+
 ### Startup troubleshooting
 
 - Run `shelly-lsp` from a terminal to verify that it is installed and executable.

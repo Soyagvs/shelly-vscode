@@ -120,7 +120,7 @@
       "patterns": [
         {
           "name": "support.function.builtin.shelly",
-          "match": "\\bshell\\b|\\bshellin\\b|\\b(?:shellout|ask|choose|command|arg|hasArg|args|exists|contains|files|create|copy|move|rename|remove|read|write|append|prepend|isFile|isDir|tempFile|tempDir|size|trim|lower|upper|replace|split|startsWith|endsWith|len|join|sort|reverse|unique|toNumber|toString|isEmpty|isNumber|isText|isList|isDict|keys|values|jsonParse|jsonStringify|basename|dirname|extension|withoutExtension|now|today|random|randomInt)\\b"
+          "match": "\\bshell\\b|\\bshellin\\b|\\b(?:shellout|ask|choose|command|arg|hasArg|args|exists|contains|files|create|copy|move|rename|remove|read|write|append|prepend|isFile|isDir|tempFile|tempDir|size|trim|lower|upper|replace|split|startsWith|endsWith|len|join|sort|reverse|unique|substring|padLeft|padRight|toNumber|toString|isEmpty|isNumber|isText|isList|isDict|keys|values|jsonParse|jsonStringify|basename|dirname|extension|withoutExtension|now|today|formatDate|random|randomInt)\\b"
         }
       ]
     },

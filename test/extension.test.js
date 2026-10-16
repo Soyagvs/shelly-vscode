@@ -43,10 +43,12 @@ test('surfaces language-server startup failures with an actionable message', () 
   assert.match(extensionSource, /serverPath|language server/i);
 });
 
-test('includes shell and shellin in builtin grammar rules', () => {
+test('includes shell, shellin, and text/date helpers in builtin grammar rules', () => {
   const builtins = grammar.repository?.builtins?.patterns ?? [];
-  assert.ok(builtins.some((pattern) => /\\bshell\\b/.test(pattern.match ?? '')));
-  assert.ok(builtins.some((pattern) => /\\bshellin\\b/.test(pattern.match ?? '')));
+  const builtinMatch = builtins.map((pattern) => pattern.match ?? '').join('|');
+  for (const helper of ['shell', 'shellin', 'substring', 'padLeft', 'padRight', 'formatDate']) {
+    assert.ok(builtinMatch.includes(helper), `missing builtin helper: ${helper}`);
+  }
 });
 
 test('does not define legacy dollar-dollar constant highlighting', () => {
