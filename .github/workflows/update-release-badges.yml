@@ -1,0 +1,63 @@
+name: Update release badges
+
+on:
+  release:
+    types: [published]
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-badges:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Update badge payloads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          response_file=$(mktemp)
+          status=$(curl --silent --show-error \
+            --output "$response_file" \
+            --write-out '%{http_code}' \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer ${GH_TOKEN}" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest")
+
+          if [ "$status" = "200" ]; then
+            release_tag=$(jq -r '.tag_name' "$response_file")
+            download_count=$(jq '[.assets[]?.download_count] | add // 0' "$response_file")
+          elif [ "$status" = "404" ]; then
+            release_tag="unreleased"
+            download_count=0
+          else
+            echo "GitHub releases API returned HTTP $status" >&2
+            cat "$response_file" >&2
+            exit 1
+          fi
+
+          jq -n --arg message "$release_tag" \
+            '{schemaVersion: 1, label: "release", message: $message, color: "blue"}' \
+            > .github/badges/release.json
+          jq -n --arg message "$download_count" \
+            '{schemaVersion: 1, label: "downloads", message: $message, color: "brightgreen"}' \
+            > .github/badges/downloads.json
+
+          if git diff --quiet -- .github/badges/release.json .github/badges/downloads.json; then
+            echo "Badge payloads are unchanged."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/badges/release.json .github/badges/downloads.json
+          git commit -m "chore: update release badges"
+          git push
