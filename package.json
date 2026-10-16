@@ -2,7 +2,7 @@
   "name": "shelly-language-oficial",
   "displayName": "Shelly Language Oficial",
   "description": "VS Code language support for Shelly .shelly scripts.",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "publisher": "AGUSTINGABRIELMARTINEZ",
   "icon": "icons/shelly.png",
   "license": "GPL-3.0-or-later",
@@ -44,7 +44,7 @@
   ],
   "scripts": {
     "package": "npx @vscode/vsce package",
-    "verify-package": "node -e \"const cp=require('child_process'); const archive='shelly-language-oficial-0.0.7.vsix'; const files=cp.execFileSync('unzip',['-Z1',archive],{encoding:'utf8'}).trim().split(/\\r?\\n/); const required=['extension/src/client.js','extension/node_modules/vscode-languageclient/lib/node/main.js','extension/node_modules/vscode-languageserver-protocol/lib/common/api.js']; const missing=required.filter((file)=>!files.includes(file)); if(missing.length){console.error('Missing VSIX files: '+missing.join(', ')); process.exit(1)} console.log('Verified VSIX files: '+required.join(', '));\"",
+    "verify-package": "node -e \"const cp=require('child_process'); const archive='shelly-language-oficial-0.0.8.vsix'; const files=cp.execFileSync('unzip',['-Z1',archive],{encoding:'utf8'}).trim().split(/\\r?\\n/); const required=['extension/src/client.js','extension/node_modules/vscode-languageclient/lib/node/main.js','extension/node_modules/vscode-languageserver-protocol/lib/common/api.js']; const missing=required.filter((file)=>!files.includes(file)); if(missing.length){console.error('Missing VSIX files: '+missing.join(', ')); process.exit(1)} console.log('Verified VSIX files: '+required.join(', '));\"",
     "compile": "npm run build",
     "build": "node --check src/extension.js",
     "validate": "node -e \"JSON.parse(require('fs').readFileSync('package.json','utf8')); JSON.parse(require('fs').readFileSync('syntaxes/shelly.tmLanguage.json','utf8'))\"",
