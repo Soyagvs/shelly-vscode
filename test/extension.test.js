@@ -51,6 +51,26 @@ test('includes shell, shellin, and text/date helpers in builtin grammar rules', 
   }
 });
 
+test('highlights matches as a builtin predicate', () => {
+  const builtinMatch = (grammar.repository?.builtins?.patterns ?? []).map((pattern) => pattern.match ?? '').join('|');
+  assert.match(builtinMatch, /matches/);
+});
+
+test('defines regex literals before generic operators and rejects unterminated literals', () => {
+  const regexIndex = grammar.patterns.findIndex((pattern) => pattern.include === '#regexLiterals');
+  const operatorIndex = grammar.patterns.findIndex((pattern) => pattern.include === '#operators');
+  assert.ok(regexIndex >= 0, 'missing regex literal include');
+  assert.ok(regexIndex < operatorIndex, 'regex literals must precede operators');
+
+  const regexRule = grammar.repository?.regexLiterals?.patterns?.[0];
+  assert.ok(regexRule?.match, 'missing regex literal match rule');
+  const literal = new RegExp(`^(?:${regexRule.match})$`);
+  for (const value of ['/^[a-z]+\\d+$/', '/path\\/segment/']) {
+    assert.match(value, literal);
+  }
+  assert.doesNotMatch('/path/segment', literal);
+});
+
 test('does not define legacy dollar-dollar constant highlighting', () => {
   const grammarText = JSON.stringify(grammar);
   assert.doesNotMatch(grammarText, /variable\.other\.constant\.shelly/);

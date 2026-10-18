@@ -26,23 +26,23 @@ Highlighting includes current Shelly syntax such as `arg`, `hasArg`, `args`, `ca
 
 ## Latest release
 
-Current version: **v0.1.0**
+Current version: **v0.1.1**
 
-Download `shelly-language-oficial-0.1.0.vsix` from the latest release:
+Download `shelly-language-oficial-0.1.1.vsix` from the latest release:
 
 <https://github.com/Soyagvs/shelly-vscode/releases/latest>
 
 Then install it with VS Code:
 
 ```sh
-code --install-extension shelly-language-oficial-0.1.0.vsix
+code --install-extension shelly-language-oficial-0.1.1.vsix
 ```
 
 Reload VS Code and open a `.shelly` file. The language mode in the bottom-right corner should say `Shelly`.
 
 ## Shelly LSP integration
 
-The extension starts a Shelly LSP v1 server for file-backed `.shelly` documents and communicates with it over standard input/output. The server supplies the language-server features and diagnostics supported by its v1 implementation. The extension does not execute Shelly scripts; it only starts the language server.
+The extension starts the `shelly-lsp` server for file-backed `.shelly` documents and communicates with it over standard input/output. The server supplies the language-server features and diagnostics supported by its implementation, including recursive Shelly `**` file-glob diagnostics, completion, and validation where supported. The extension does not expand globs itself or execute Shelly scripts; it only starts the language server.
 
 Install the `shelly-lsp` executable separately and make sure it is available on your `PATH`. The extension uses `shelly-lsp` by default. To use a different executable or an absolute path, set `shelly.serverPath` in VS Code settings, for example:
 
@@ -84,7 +84,7 @@ Install dependencies and build the `.vsix` package (including production runtime
 npm ci
 npm run package
 npm run verify-package
-code --install-extension shelly-language-oficial-0.1.0.vsix
+code --install-extension shelly-language-oficial-0.1.1.vsix
 ```
 
 `npm run verify-package` inspects the resulting VSIX and fails unless the extension client and `vscode-languageclient` runtime entrypoint are present.
