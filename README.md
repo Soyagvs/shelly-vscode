@@ -42,7 +42,7 @@ Reload VS Code and open a `.shelly` file. The language mode in the bottom-right 
 
 ## Shelly LSP integration
 
-The extension starts the `shelly-lsp` server for file-backed `.shelly` documents and communicates with it over standard input/output. The shared server capabilities include diagnostics, completion, hover, definition, references, document symbols, workspace symbols, and conservative rename. Validation for recursive Shelly `**` file globs is provided by the server; the extension does not expand globs itself or execute Shelly scripts.
+The extension starts the `shelly-lsp` server for file-backed `.shelly` documents and communicates with it over standard input/output. The verified shared capabilities are: diagnostics, completion, hover, definition, references, document symbols, workspace symbols, and conservative rename. Validation for recursive Shelly `**` file globs is provided by the server; the extension does not expand globs itself or execute Shelly scripts.
 
 Install the `shelly-lsp` executable separately and make sure it is available on your `PATH`. The extension uses `shelly-lsp` by default. To use a different executable or an absolute path, set `shelly.serverPath` in VS Code settings, for example:
 
