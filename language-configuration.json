@@ -78,7 +78,7 @@
     }
   },
   "indentationRules": {
-    "increaseIndentPattern": "^\\s*(?:\\bfn\\b|\\bif\\b|\\belif\\b|\\belse\\b|\\brepeat\\b|\\bwhile\\b|\\bfor\\b|\\btry\\b|\\bcatch\\b|\\bcase\\b|\\bwhen\\b|\\blog\\b)(?!.*\\bend\\b).*$",
+    "increaseIndentPattern": "^\\s*(?:\\bfn\\b|\\bif\\b|\\belif\\b|\\belse\\b|\\brepeat\\b|\\bwhile\\b|\\bfor\\b|\\btry\\b|\\bcatch\\b|\\bcase\\b|\\bwhen\\b|\\blog\\b|\\bwatch\\b)(?!.*\\bend\\b).*$",
     "decreaseIndentPattern": "^\\s*(elif|else|end)\\b.*$"
   }
 }

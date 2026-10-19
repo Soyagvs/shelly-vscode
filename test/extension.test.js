@@ -86,7 +86,17 @@ test('defines dedicated function-name and dictionary-key grammar patterns', () =
 
 test('indents all block constructs in language configuration', () => {
   const increase = languageConfiguration.indentationRules?.increaseIndentPattern ?? '';
-  for (const keyword of ['try', 'catch', 'case', 'when', 'log']) {
+  for (const keyword of ['try', 'catch', 'case', 'when', 'log', 'watch']) {
     assert.match(increase, new RegExp(`\\\\b${keyword}\\\\b`));
   }
+});
+
+test('highlights watch as a builtin command', () => {
+  const builtinMatch = (grammar.repository?.builtins?.patterns ?? []).map((pattern) => pattern.match ?? '').join('|');
+  assert.match(builtinMatch, /watch/);
+});
+
+test('highlights wait as a builtin command', () => {
+  const builtinMatch = (grammar.repository?.builtins?.patterns ?? []).map((pattern) => pattern.match ?? '').join('|');
+  assert.match(builtinMatch, /wait/);
 });

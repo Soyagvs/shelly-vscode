@@ -22,7 +22,7 @@ This extension ships a `Shelly Icons` file icon theme that maps `.shelly` files 
 
 ## Shelly v3.1 syntax coverage
 
-Highlighting includes current Shelly syntax such as `arg`, `hasArg`, `args`, `case` / `when`, `try` / `catch`, `log`, text and date helpers, file helpers, JSON helpers, dictionaries, nested list/dictionary access, and triple-backtick multiline strings.
+Highlighting includes current Shelly syntax such as `arg`, `hasArg`, `args`, `case` / `when`, `try` / `catch`, `log`, `watch <program> <args...> -> $line ... end`, bare `wait`, text and date helpers, file helpers, JSON helpers, dictionaries, nested list/dictionary access, and triple-backtick multiline strings.
 
 ## Latest release
 
