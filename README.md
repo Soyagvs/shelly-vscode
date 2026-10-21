@@ -26,9 +26,9 @@ Highlighting includes current Shelly syntax such as `arg`, `hasArg`, `args`, `ca
 
 ## Latest release
 
-Current version: **v0.1.3**
+Current version: **v0.2.0**
 
-Download `shelly-language-oficial-0.1.3.vsix` from the latest release:
+Download `shelly-language-oficial-0.2.0.vsix` from the latest release:
 
 <https://github.com/Soyagvs/shelly-vscode/releases/latest>
 
@@ -84,7 +84,7 @@ Install dependencies and build the `.vsix` package (including production runtime
 npm ci
 npm run package
 npm run verify-package
-code --install-extension shelly-language-oficial-0.1.3.vsix
+code --install-extension shelly-language-oficial-0.2.0.vsix
 ```
 
 `npm run verify-package` inspects the resulting VSIX and fails unless the extension client and `vscode-languageclient` runtime entrypoint are present.

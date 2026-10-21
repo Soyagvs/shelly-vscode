@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.0] - 2026-10-21
+
+- Added archive v1 syntax highlighting support.
+
+[0.2.0]: https://github.com/Soyagvs/shelly-vscode/releases/tag/v0.2.0
+
 ## [0.1.3] - 2026-10-03
 
 - Improved workspace-aware LSP client behavior.
