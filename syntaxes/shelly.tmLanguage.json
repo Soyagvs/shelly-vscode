@@ -16,6 +16,9 @@
       "include": "#http"
     },
     {
+      "include": "#archive"
+    },
+    {
       "include": "#dictionaryKeys"
     },
     {
@@ -85,6 +88,34 @@
             {
               "name": "variable.other.interpolation.shelly",
               "match": "\\$[A-Za-z][A-Za-z0-9_]*(?:\\[[^\\]\\r\\n]*\\]|\\.[A-Za-z][A-Za-z0-9_]*)*"
+            }
+          ]
+        }
+      ]
+    },
+    "archive": {
+      "patterns": [
+        {
+          "name": "support.function.archive.shelly",
+          "begin": "(?<![$A-Za-z0-9_])archive(?![A-Za-z0-9_])",
+          "end": "(?=\\r?$)",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#strings"
+            },
+            {
+              "name": "support.function.archive.subcommand.shelly",
+              "match": "(?<![$A-Za-z0-9_])(?:create|extract|checksum|check)(?![A-Za-z0-9_])"
+            },
+            {
+              "name": "support.type.property-name.archive.shelly",
+              "match": "(?<![$A-Za-z0-9_])(?:from|into)(?![A-Za-z0-9_])"
+            },
+            {
+              "include": "#variables"
             }
           ]
         }

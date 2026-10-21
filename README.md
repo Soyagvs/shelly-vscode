@@ -11,7 +11,7 @@ This repository is separate from the Shelly runtime so users can clone, test, in
 ## Features
 
 - Registers the `shelly` language for `.shelly` files.
-- Adds TextMate syntax highlighting for comments, one-line and multiline strings, variables, constants, keywords, built-ins, HTTP v1 commands and options, numbers, operators, arrows, dictionaries, nested access, and list selectors.
+- Adds TextMate syntax highlighting for comments, one-line and multiline strings, variables, constants, keywords, built-ins, HTTP v1 commands and options, archive v1 commands and options, numbers, operators, arrows, dictionaries, nested access, and list selectors.
 - Adds bracket, comment, folding, auto-closing, surrounding-pair, and simple indentation configuration.
 - Connects `.shelly` files to the Shelly LSP v1 language server for editor language features and diagnostics.
 
@@ -22,7 +22,7 @@ This extension ships a `Shelly Icons` file icon theme that maps `.shelly` files 
 
 ## Shelly v3.1 syntax coverage
 
-Highlighting includes current Shelly syntax such as `arg`, `hasArg`, `args`, `case` / `when`, `try` / `catch`, `log`, `watch <program> <args...> -> $line ... end`, bare `wait`, HTTP v1 `http` requests with `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`, and `OPTIONS`, plus `headers`, `body`, `timeout`, and `maxBytes` options, text and date helpers, file helpers, JSON helpers, dictionaries, nested list/dictionary access, and triple-backtick multiline strings.
+Highlighting includes current Shelly syntax such as `arg`, `hasArg`, `args`, `case` / `when`, `try` / `catch`, `log`, `watch <program> <args...> -> $line ... end`, bare `wait`, HTTP v1 `http` requests with `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`, and `OPTIONS`, plus `headers`, `body`, `timeout`, and `maxBytes` options; archive v1 `archive` commands with `create`, `extract`, `checksum`, `check`, `from`, and `into`; text and date helpers, file helpers, JSON helpers, dictionaries, nested list/dictionary access, and triple-backtick multiline strings.
 
 ## Latest release
 

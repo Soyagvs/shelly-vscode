@@ -128,6 +128,28 @@ test('highlights wait as a builtin command', () => {
   assert.match(builtinMatch, /wait/);
 });
 
+test('defines archive v1 commands and options without matching variables or unrelated commands', () => {
+  const archiveRules = grammar.repository?.archive?.patterns ?? [];
+  assert.equal(archiveRules.length, 1);
+  const archiveRule = archiveRules[0];
+  assert.equal(archiveRule.name, 'support.function.archive.shelly');
+  assert.match(archiveRule.begin, /archive/);
+  const subcommandRule = archiveRule.patterns.find((pattern) => pattern.name === 'support.function.archive.subcommand.shelly');
+  const optionRule = archiveRule.patterns.find((pattern) => pattern.name === 'support.type.property-name.archive.shelly');
+  assert.ok(subcommandRule?.match, 'missing archive subcommand rule');
+  assert.ok(optionRule?.match, 'missing archive option rule');
+  const subcommand = new RegExp(`^(?:${subcommandRule.match})$`);
+  for (const value of ['create', 'extract', 'checksum', 'check']) assert.match(value, subcommand);
+  assert.doesNotMatch('archive', subcommand);
+  assert.doesNotMatch('$create', subcommand);
+  const option = new RegExp(`^(?:${optionRule.match})$`);
+  for (const value of ['from', 'into']) assert.match(value, option);
+  assert.doesNotMatch('$from', option);
+  const archiveIndex = grammar.patterns.findIndex((pattern) => pattern.include === '#archive');
+  assert.ok(archiveIndex > grammar.patterns.findIndex((pattern) => pattern.include === '#strings'));
+  assert.ok(archiveIndex < grammar.patterns.findIndex((pattern) => pattern.include === '#variables'));
+});
+
 test('defines HTTP v1 commands, methods, and options without matching variables', () => {
   const httpRules = grammar.repository?.http?.patterns ?? [];
   assert.equal(httpRules.length, 2);
