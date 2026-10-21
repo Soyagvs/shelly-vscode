@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3] - 2026-10-03
+
+- Improved workspace-aware LSP client behavior.
+- Added HTTP syntax highlighting.
+
+[0.1.3]: https://github.com/Soyagvs/shelly-vscode/releases/tag/v0.1.3
+
 ## [0.1.2] - 2026-10-02
 
 - Added watch command grammar with process arguments, arrow handlers, and block termination.
