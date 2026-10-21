@@ -150,6 +150,28 @@ test('defines archive v1 commands and options without matching variables or unre
   assert.ok(archiveIndex < grammar.patterns.findIndex((pattern) => pattern.include === '#variables'));
 });
 
+test('defines mock and secret commands with target subcommands without matching strings, variables, or comments', () => {
+  const mockRules = grammar.repository?.mock?.patterns ?? [];
+  assert.equal(mockRules.length, 1);
+  const mockRule = mockRules[0];
+  assert.equal(mockRule.name, 'support.function.mock.shelly');
+  assert.match(mockRule.begin, /mock/);
+  assert.match(mockRule.begin, /secret/);
+  const subcommandRule = mockRule.patterns.find((pattern) => pattern.name === 'support.function.mock.subcommand.shelly');
+  const returnsRule = mockRule.patterns.find((pattern) => pattern.name === 'keyword.control.mock.returns.shelly');
+  assert.ok(subcommandRule?.match, 'missing mock target subcommand rule');
+  assert.ok(returnsRule?.match, 'missing mock returns rule');
+  const subcommands = new RegExp(`^(?:${subcommandRule.match})$`);
+  for (const value of ['get', 'set', 'call', 'event', 'notify']) assert.match(value, subcommands);
+  for (const value of ['mock', 'secret', '$get', '"get"', '# get #']) assert.doesNotMatch(value, subcommands);
+  const returns = new RegExp(`^(?:${returnsRule.match})$`);
+  assert.match('returns', returns);
+  assert.doesNotMatch('$returns', returns);
+  assert.ok(grammar.patterns.some((pattern) => pattern.include === '#mock'));
+  assert.ok(grammar.patterns.findIndex((pattern) => pattern.include === '#mock') > grammar.patterns.findIndex((pattern) => pattern.include === '#strings'));
+  assert.ok(grammar.patterns.findIndex((pattern) => pattern.include === '#mock') < grammar.patterns.findIndex((pattern) => pattern.include === '#variables'));
+});
+
 test('defines HTTP v1 commands, methods, and options without matching variables', () => {
   const httpRules = grammar.repository?.http?.patterns ?? [];
   assert.equal(httpRules.length, 2);

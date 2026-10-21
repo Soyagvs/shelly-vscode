@@ -19,6 +19,9 @@
       "include": "#archive"
     },
     {
+      "include": "#mock"
+    },
+    {
       "include": "#dictionaryKeys"
     },
     {
@@ -113,6 +116,34 @@
             {
               "name": "support.type.property-name.archive.shelly",
               "match": "(?<![$A-Za-z0-9_])(?:from|into)(?![A-Za-z0-9_])"
+            },
+            {
+              "include": "#variables"
+            }
+          ]
+        }
+      ]
+    },
+    "mock": {
+      "patterns": [
+        {
+          "name": "support.function.mock.shelly",
+          "begin": "(?<![$A-Za-z0-9_])(?:mock|secret)(?![A-Za-z0-9_])",
+          "end": "(?=\\r?$)",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#strings"
+            },
+            {
+              "name": "support.function.mock.subcommand.shelly",
+              "match": "(?<![$A-Za-z0-9_])(?:get|set|call|event|notify)(?![A-Za-z0-9_])"
+            },
+            {
+              "name": "keyword.control.mock.returns.shelly",
+              "match": "(?<![$A-Za-z0-9_])returns(?![A-Za-z0-9_])"
             },
             {
               "include": "#variables"
