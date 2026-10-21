@@ -11,7 +11,7 @@ This repository is separate from the Shelly runtime so users can clone, test, in
 ## Features
 
 - Registers the `shelly` language for `.shelly` files.
-- Adds TextMate syntax highlighting for comments, one-line and multiline strings, variables, constants, keywords, built-ins, numbers, operators, arrows, dictionaries, nested access, and list selectors.
+- Adds TextMate syntax highlighting for comments, one-line and multiline strings, variables, constants, keywords, built-ins, HTTP v1 commands and options, numbers, operators, arrows, dictionaries, nested access, and list selectors.
 - Adds bracket, comment, folding, auto-closing, surrounding-pair, and simple indentation configuration.
 - Connects `.shelly` files to the Shelly LSP v1 language server for editor language features and diagnostics.
 
@@ -22,7 +22,7 @@ This extension ships a `Shelly Icons` file icon theme that maps `.shelly` files 
 
 ## Shelly v3.1 syntax coverage
 
-Highlighting includes current Shelly syntax such as `arg`, `hasArg`, `args`, `case` / `when`, `try` / `catch`, `log`, `watch <program> <args...> -> $line ... end`, bare `wait`, text and date helpers, file helpers, JSON helpers, dictionaries, nested list/dictionary access, and triple-backtick multiline strings.
+Highlighting includes current Shelly syntax such as `arg`, `hasArg`, `args`, `case` / `when`, `try` / `catch`, `log`, `watch <program> <args...> -> $line ... end`, bare `wait`, HTTP v1 `http` requests with `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`, and `OPTIONS`, plus `headers`, `body`, `timeout`, and `maxBytes` options, text and date helpers, file helpers, JSON helpers, dictionaries, nested list/dictionary access, and triple-backtick multiline strings.
 
 ## Latest release
 
@@ -42,7 +42,7 @@ Reload VS Code and open a `.shelly` file. The language mode in the bottom-right 
 
 ## Shelly LSP integration
 
-The extension starts the `shelly-lsp` server for file-backed `.shelly` documents and communicates with it over standard input/output. The verified shared capabilities are: diagnostics, completion, hover, definition, references, document symbols, workspace symbols, and conservative rename. Validation for recursive Shelly `**` file globs is provided by the server; the extension does not expand globs itself or execute Shelly scripts.
+The extension starts the `shelly-lsp` server for file-backed `.shelly` documents and communicates with it over standard input/output. The client uses the active document's workspace folder (or the sole folder in an ordinary single-folder workspace) for the server working directory and standard LSP workspace-root data. With no applicable folder it starts without a root and uses the extension host's working directory. Multi-root folder selection is intentionally not inferred. The verified shared capabilities are: diagnostics, completion, hover, definition, references, document symbols, workspace symbols, and conservative rename. Validation for recursive Shelly `**` file globs is provided by the server; the extension does not expand globs itself or execute Shelly scripts.
 
 Install the `shelly-lsp` executable separately and make sure it is available on your `PATH`. The extension uses `shelly-lsp` by default. To use a different executable or an absolute path, set `shelly.serverPath` in VS Code settings, for example:
 

@@ -13,6 +13,9 @@
       "include": "#functionNames"
     },
     {
+      "include": "#http"
+    },
+    {
       "include": "#dictionaryKeys"
     },
     {
@@ -84,6 +87,18 @@
               "match": "\\$[A-Za-z][A-Za-z0-9_]*(?:\\[[^\\]\\r\\n]*\\]|\\.[A-Za-z][A-Za-z0-9_]*)*"
             }
           ]
+        }
+      ]
+    },
+    "http": {
+      "patterns": [
+        {
+          "name": "support.function.http.shelly",
+          "match": "(?<![$A-Za-z0-9_])http(?![A-Za-z0-9_])|(?<![$A-Za-z0-9_.])(?:GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS)(?![A-Za-z0-9_])"
+        },
+        {
+          "name": "support.type.property-name.http.shelly",
+          "match": "(?<![$A-Za-z0-9_])(?:headers|body|timeout|maxBytes)(?=\\s*:)(?![A-Za-z0-9_])"
         }
       ]
     },

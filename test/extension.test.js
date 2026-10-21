@@ -7,6 +7,7 @@ const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'packa
 const extensionSource = fs.readFileSync(path.join(__dirname, '..', 'src', 'extension.js'), 'utf8');
 const grammar = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'syntaxes', 'shelly.tmLanguage.json'), 'utf8'));
 const languageConfiguration = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'language-configuration.json'), 'utf8'));
+const { getShellyWorkspaceContext } = require('../src/client');
 
 test('declares shelly-lsp as the default server path and exposes shelly.serverPath', () => {
   const properties = packageJson.contributes?.configuration?.properties;
@@ -17,6 +18,32 @@ test('uses the configured shelly.serverPath when constructing the language serve
   assert.match(extensionSource, /shelly\.serverPath/);
   assert.match(extensionSource, /getConfiguration\(['"]shelly['"]\)/);
   assert.match(extensionSource, /serverPath/);
+});
+
+test('selects the active document folder and propagates its root context', () => {
+  const folder = { uri: { fsPath: '/workspace/app' } };
+  const vscode = {
+    window: { activeTextEditor: { document: { uri: { toString: () => 'file:///workspace/app/main.shelly' } } } },
+    workspace: {
+      workspaceFolders: [folder, { uri: { fsPath: '/workspace/other' } }],
+      getWorkspaceFolder(uri) {
+        assert.ok(uri);
+        return folder;
+      },
+    },
+  };
+  assert.deepEqual(getShellyWorkspaceContext(vscode), { workspaceFolder: folder, cwd: '/workspace/app' });
+});
+
+test('uses the sole folder without an active editor and has safe no-workspace behavior', () => {
+  const folder = { uri: { fsPath: '/workspace/only' } };
+  const single = { window: {}, workspace: { workspaceFolders: [folder], getWorkspaceFolder() {} } };
+  assert.deepEqual(getShellyWorkspaceContext(single), { workspaceFolder: folder, cwd: '/workspace/only' });
+
+  const none = { window: {}, workspace: { workspaceFolders: [], getWorkspaceFolder() {} } };
+  const context = getShellyWorkspaceContext(none);
+  assert.equal(context.workspaceFolder, undefined);
+  assert.equal(context.cwd, process.cwd());
 });
 
 test('selects only file-backed Shelly documents for the language client', () => {
@@ -99,4 +126,25 @@ test('highlights watch as a builtin command', () => {
 test('highlights wait as a builtin command', () => {
   const builtinMatch = (grammar.repository?.builtins?.patterns ?? []).map((pattern) => pattern.match ?? '').join('|');
   assert.match(builtinMatch, /wait/);
+});
+
+test('defines HTTP v1 commands, methods, and options without matching variables', () => {
+  const httpRules = grammar.repository?.http?.patterns ?? [];
+  assert.equal(httpRules.length, 2);
+  const commandRule = httpRules.find((pattern) => pattern.name === 'support.function.http.shelly');
+  const optionRule = httpRules.find((pattern) => pattern.name === 'support.type.property-name.http.shelly');
+  assert.ok(commandRule?.match, 'missing HTTP command rule');
+  assert.ok(optionRule?.match, 'missing HTTP option rule');
+  const command = new RegExp(`^(?:${commandRule.match})$`);
+  for (const value of ['http', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS']) {
+    assert.match(value, command);
+  }
+  assert.doesNotMatch('$http', command);
+  const option = new RegExp(optionRule.match);
+  for (const value of ['headers:', 'body:', 'timeout:', 'maxBytes:']) {
+    assert.match(value, option);
+  }
+  const httpIndex = grammar.patterns.findIndex((pattern) => pattern.include === '#http');
+  assert.ok(httpIndex > grammar.patterns.findIndex((pattern) => pattern.include === '#strings'));
+  assert.ok(httpIndex < grammar.patterns.findIndex((pattern) => pattern.include === '#variables'));
 });
