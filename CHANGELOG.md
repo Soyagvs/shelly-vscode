@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.0]
+
+- Improved syntax highlighting for mock and secret constructs.
+
+[0.3.0]: https://github.com/Soyagvs/shelly-vscode/releases/tag/v0.3.0
+
 ## [0.2.0] - 2026-10-21
 
 - Added archive v1 syntax highlighting support.

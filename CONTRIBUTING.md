@@ -89,10 +89,10 @@ npm run package
 npm run verify-package
 ```
 
-`npm run package` creates `shelly-language-oficial-0.2.0.vsix`. The verification script checks that the VSIX contains the extension client and required `vscode-languageclient` and protocol runtime files. Install it locally only when needed for an install test:
+`npm run package` creates `shelly-language-oficial-0.3.0.vsix`. The verification script checks that the VSIX contains the extension client and required `vscode-languageclient` and protocol runtime files. Install it locally only when needed for an install test:
 
 ```sh
-code --install-extension shelly-language-oficial-0.2.0.vsix
+code --install-extension shelly-language-oficial-0.3.0.vsix
 ```
 
 Do not commit generated VSIX files.
