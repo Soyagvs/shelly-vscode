@@ -1,6 +1,17 @@
 <img width="2056" height="765" alt="Shelly_ Extensión VS Code y Cuervo" src="https://github.com/user-attachments/assets/1d2b8056-d182-42e6-afba-574a78421053" />
 
-[![Release](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Soyagvs/shelly-vscode/main/.github/badges/release.json&style=flat-square)](https://github.com/Soyagvs/shelly-vscode/releases) [![Downloads](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Soyagvs/shelly-vscode/main/.github/badges/downloads.json&style=flat-square)](https://github.com/Soyagvs/shelly-vscode/releases)
+<p align="center">
+  <a href="https://github.com/Soyagvs/shelly-vscode/releases"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Soyagvs/shelly-vscode/main/.github/badges/release.json&style=flat-square" alt="Release" /></a>
+  <a href="https://github.com/Soyagvs/shelly-vscode/releases"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Soyagvs/shelly-vscode/main/.github/badges/downloads.json&style=flat-square" alt="Downloads" /></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Soyagvs/shelly-vscode/releases">Releases</a> ·
+  <a href="https://github.com/Soyagvs/shelly">Shelly runtime</a> ·
+  <a href="https://github.com/Soyagvs/shelly-nvim">Shelly Neovim</a>
+</p>
+
+<p align="center">· · ·</p>
 
 # Shelly Language Oficial for VS Code
 
