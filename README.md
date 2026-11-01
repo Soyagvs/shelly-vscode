@@ -11,8 +11,6 @@
   <a href="https://github.com/Soyagvs/shelly-nvim">Shelly Neovim</a>
 </p>
 
-<p align="center">· · ·</p>
-
 # Shelly Language Oficial for VS Code
 
 VS Code language support for `.shelly` scripts.
