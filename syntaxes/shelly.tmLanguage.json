@@ -160,7 +160,7 @@
         },
         {
           "name": "support.type.property-name.http.shelly",
-          "match": "(?<![$A-Za-z0-9_])(?:headers|body|timeout|maxBytes)(?=\\s*:)(?![A-Za-z0-9_])"
+          "match": "(?<![$A-Za-z0-9_])(?:headers|body|timeout|maxBytes|httpPages|maxPages|maxTotalBytes)(?=\\s*:)(?![A-Za-z0-9_])"
         }
       ]
     },

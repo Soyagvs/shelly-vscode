@@ -185,7 +185,7 @@ test('defines HTTP v1 commands, methods, and options without matching variables'
   }
   assert.doesNotMatch('$http', command);
   const option = new RegExp(optionRule.match);
-  for (const value of ['headers:', 'body:', 'timeout:', 'maxBytes:']) {
+  for (const value of ['headers:', 'body:', 'timeout:', 'maxBytes:', 'httpPages:', 'maxPages:', 'maxTotalBytes:']) {
     assert.match(value, option);
   }
   const httpIndex = grammar.patterns.findIndex((pattern) => pattern.include === '#http');

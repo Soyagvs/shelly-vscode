@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.4.0]
+
+- Added HTTP `httpPages`, `maxPages`, and `maxTotalBytes` option highlighting.
+
+[0.4.0]: https://github.com/Soyagvs/shelly-vscode/releases/tag/v0.4.0
+
 ## [0.3.0]
 
 - Improved syntax highlighting for mock and secret constructs.
