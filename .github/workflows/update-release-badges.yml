@@ -36,15 +36,39 @@ jobs:
 
           if [ "$status" = "200" ]; then
             release_tag=$(jq -r '.tag_name' "$response_file")
-            download_count=$(jq '[.assets[]?.download_count] | add // 0' "$response_file")
           elif [ "$status" = "404" ]; then
             release_tag="unreleased"
-            download_count=0
           else
             echo "GitHub releases API returned HTTP $status" >&2
             cat "$response_file" >&2
             exit 1
           fi
+
+          download_count=0
+          page=1
+          while :; do
+            page_file=$(mktemp)
+            status=$(curl --silent --show-error \
+              --output "$page_file" \
+              --write-out '%{http_code}' \
+              --header "Accept: application/vnd.github+json" \
+              --header "Authorization: Bearer ${GH_TOKEN}" \
+              --header "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/releases?per_page=100&page=${page}")
+
+            if [ "$status" != "200" ]; then
+              echo "GitHub releases API returned HTTP $status for page $page" >&2
+              cat "$page_file" >&2
+              exit 1
+            fi
+
+            download_count=$((download_count + $(jq '[.[] | select(.draft == false and .prerelease == false) | .assets[]?.download_count] | add // 0' "$page_file")))
+            release_count=$(jq 'length' "$page_file")
+            if [ "$release_count" -lt 100 ]; then
+              break
+            fi
+            page=$((page + 1))
+          done
 
           jq -n --arg message "$release_tag" \
             '{schemaVersion: 1, label: "release", message: $message, color: "blue"}' \
