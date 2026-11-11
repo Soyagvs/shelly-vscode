@@ -20,7 +20,7 @@ This repository is separate from the Shelly runtime so users can clone, test, in
 ## Features
 
 - Registers the `shelly` language for `.shelly` files.
-- Adds TextMate syntax highlighting for comments, one-line and multiline strings, variables, constants, keywords, built-ins, HTTP v1 commands and options, archive v1 commands and options, numbers, operators, arrows, dictionaries, nested access, and list selectors.
+- Adds TextMate syntax highlighting for comments, one-line and multiline strings, variables, constants, keywords, built-ins, structured automation (`retry`, `pipeline`, and `parallel`), HTTP v1 commands and options, archive v1 commands and options, numbers, operators, arrows, dictionaries, nested access, and list selectors.
 - Adds bracket, comment, folding, auto-closing, surrounding-pair, and simple indentation configuration.
 - Connects `.shelly` files to the Shelly LSP v1 language server for editor language features and diagnostics.
 
@@ -31,20 +31,20 @@ This extension ships a `Shelly Icons` file icon theme that maps `.shelly` files 
 
 ## Shelly v3.1 syntax coverage
 
-Highlighting includes current Shelly syntax such as `arg`, `hasArg`, `args`, `case` / `when`, `try` / `catch`, `log`, `watch <program> <args...> -> $line ... end`, bare `wait`, HTTP v1 `http` requests with `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`, and `OPTIONS`, plus `headers`, `body`, `timeout`, `maxBytes`, `httpPages`, `maxPages`, and `maxTotalBytes` options; archive v1 `archive` commands with `create`, `extract`, `checksum`, `check`, `from`, and `into`; text and date helpers, file helpers, JSON helpers, dictionaries, nested list/dictionary access, and triple-backtick multiline strings.
+Highlighting includes current Shelly syntax such as `arg`, `hasArg`, `args`, `case` / `when`, `try` / `catch`, structured automation blocks (`retry`, `pipeline`, and `parallel`), pipeline command-only forms such as `pipeline command ... end`, `log`, `watch <program> <args...> -> $line ... end`, bare `wait`, HTTP v1 `http` requests with `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`, and `OPTIONS`, plus `headers`, `body`, `timeout`, `maxBytes`, `httpPages`, `maxPages`, and `maxTotalBytes` options; archive v1 `archive` commands with `create`, `extract`, `checksum`, `check`, `from`, and `into`; text and date helpers, file helpers, JSON helpers, dictionaries, nested list/dictionary access, and triple-backtick multiline strings.
 
 ## Latest release
 
-Current version: **v0.4.0**
+Current version: **v0.5.0**
 
-Download `shelly-language-oficial-0.4.0.vsix` from the latest release:
+Download `shelly-language-oficial-0.5.0.vsix` from the latest release:
 
 <https://github.com/Soyagvs/shelly-vscode/releases/latest>
 
 Then install it with VS Code:
 
 ```sh
-code --install-extension shelly-language-oficial-0.4.0.vsix
+code --install-extension shelly-language-oficial-0.5.0.vsix
 ```
 
 Reload VS Code and open a `.shelly` file. The language mode in the bottom-right corner should say `Shelly`.
@@ -93,7 +93,7 @@ Install dependencies and build the `.vsix` package (including production runtime
 npm ci
 npm run package
 npm run verify-package
-code --install-extension shelly-language-oficial-0.4.0.vsix
+code --install-extension shelly-language-oficial-0.5.0.vsix
 ```
 
 `npm run verify-package` inspects the resulting VSIX and fails unless the extension client and `vscode-languageclient` runtime entrypoint are present.

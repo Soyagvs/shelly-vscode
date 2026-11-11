@@ -192,7 +192,7 @@
       "patterns": [
         {
           "name": "keyword.control.shelly",
-          "match": "\\b(?:fn|end|if|elif|else|case|when|repeat|while|for|in|try|catch|log|call|return|break|continue|and|or|not|global|export|import|include|exit)\\b"
+          "match": "\\b(?:fn|end|if|elif|else|case|when|repeat|while|for|in|try|catch|retry|pipeline|parallel|log|call|return|break|continue|and|or|not|global|export|import|include|exit)\\b"
         }
       ]
     },

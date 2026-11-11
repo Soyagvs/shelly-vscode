@@ -111,11 +111,26 @@ test('defines dedicated function-name and dictionary-key grammar patterns', () =
   assert.ok(grammar.patterns.some((pattern) => pattern.include === '#dictionaryKeys'));
 });
 
+test('highlights structured-automation keywords', () => {
+  const keywordMatch = (grammar.repository?.keywords?.patterns ?? []).map((pattern) => pattern.match ?? '').join('|');
+  const keyword = new RegExp(`^(?:${keywordMatch})$`);
+  for (const value of ['retry', 'pipeline', 'parallel']) assert.match(value, keyword);
+  assert.doesNotMatch('pipelineName', keyword);
+});
+
 test('indents all block constructs in language configuration', () => {
   const increase = languageConfiguration.indentationRules?.increaseIndentPattern ?? '';
-  for (const keyword of ['try', 'catch', 'case', 'when', 'log', 'watch']) {
+  for (const keyword of ['try', 'catch', 'retry', 'pipeline', 'parallel', 'case', 'when', 'log', 'watch']) {
     assert.match(increase, new RegExp(`\\\\b${keyword}\\\\b`));
   }
+});
+
+test('allows pipeline to open with a command directly, without requiring shell', () => {
+  const keywordMatch = (grammar.repository?.keywords?.patterns ?? []).map((pattern) => pattern.match ?? '').join('|');
+  const pipelineLine = /^pipeline\s+command\b.*\bend\s*$/;
+  assert.match('pipeline command build end', pipelineLine);
+  assert.match('pipeline', new RegExp(`^(?:${keywordMatch})$`));
+  assert.doesNotMatch(keywordMatch, /shell.*pipeline|pipeline.*shell/);
 });
 
 test('highlights watch as a builtin command', () => {

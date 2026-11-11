@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0]
+
+- Added structured-automation keyword highlighting and indentation for `retry`, `pipeline`, and `parallel` blocks.
+- Documented pipeline command-only syntax.
+
+[0.5.0]: https://github.com/Soyagvs/shelly-vscode/releases/tag/v0.5.0
+
 ## [0.4.0]
 
 - Added HTTP `httpPages`, `maxPages`, and `maxTotalBytes` option highlighting.
