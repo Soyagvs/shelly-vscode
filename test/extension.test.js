@@ -70,12 +70,13 @@ test('surfaces language-server startup failures with an actionable message', () 
   assert.match(extensionSource, /serverPath|language server/i);
 });
 
-test('includes shell, shellin, and text/date helpers in builtin grammar rules', () => {
+test('includes menu and contextual menu directives in builtin grammar rules and rejects choose', () => {
   const builtins = grammar.repository?.builtins?.patterns ?? [];
   const builtinMatch = builtins.map((pattern) => pattern.match ?? '').join('|');
-  for (const helper of ['shell', 'shellin', 'substring', 'padLeft', 'padRight', 'formatDate']) {
+  for (const helper of ['shell', 'shellin', 'substring', 'padLeft', 'padRight', 'formatDate', 'menu', 'subtitle', 'theme', 'default', 'option', 'hint']) {
     assert.ok(builtinMatch.includes(helper), `missing builtin helper: ${helper}`);
   }
+  assert.doesNotMatch(builtinMatch, /choose/);
 });
 
 test('highlights matches as a builtin predicate', () => {
