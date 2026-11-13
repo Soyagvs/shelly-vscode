@@ -20,7 +20,7 @@ This repository is separate from the Shelly runtime so users can clone, test, in
 ## Features
 
 - Registers the `shelly` language for `.shelly` files.
-- Adds TextMate syntax highlighting for comments, one-line and multiline strings, variables, constants, keywords, built-ins, structured automation (`retry`, `pipeline`, and `parallel`), core `menu` blocks (`keys numbers`, `keys letters lower|upper`, keyed or unkeyed `option`, and blank `shellout ""` rows), HTTP v1 commands and options, archive v1 commands and options, numbers, operators, arrows, dictionaries, nested access, and list selectors.
+- Adds TextMate syntax highlighting for comments, one-line and multiline strings, variables, constants, keywords, built-ins, structured automation (`retry`, `pipeline`, and `parallel`), core `menu` blocks (`keys numbers`, `keys letters lower|upper`, keyed or unkeyed `option`, and blank `shellout ""` rows), `clear`, `progress`, HTTP v1 commands and options, archive v1 commands and options, numbers, operators, arrows, dictionaries, nested access, and list selectors.
 - Adds bracket, comment, folding, auto-closing, surrounding-pair, and simple indentation configuration.
 - Connects `.shelly` files to the Shelly LSP v1 language server for editor language features and diagnostics.
 
@@ -35,23 +35,23 @@ Highlighting includes current Shelly syntax such as `menu` blocks with indented 
 
 ## Latest release
 
-Current version: **v0.6.0**
+Current version: **v0.6.2**
 
-Download `shelly-language-oficial-0.6.0.vsix` from the latest release:
+Download `shelly-language-oficial-0.6.2.vsix` from the latest release:
 
 <https://github.com/Soyagvs/shelly-vscode/releases/latest>
 
 Then install it with VS Code:
 
 ```sh
-code --install-extension shelly-language-oficial-0.6.0.vsix
+code --install-extension shelly-language-oficial-0.6.2.vsix
 ```
 
 Reload VS Code and open a `.shelly` file. The language mode in the bottom-right corner should say `Shelly`.
 
 ## Shelly LSP integration
 
-The extension starts the `shelly-lsp` server for file-backed `.shelly` documents and communicates with it over standard input/output. The client uses the active document's workspace folder (or the sole folder in an ordinary single-folder workspace) for the server working directory and standard LSP workspace-root data. With no applicable folder it starts without a root and uses the extension host's working directory. Multi-root folder selection is intentionally not inferred. The verified shared capabilities are: diagnostics, completion, hover, definition, references, document symbols, workspace symbols, and conservative rename. Validation for recursive Shelly `**` file globs is provided by the server; the extension does not expand globs itself or execute Shelly scripts.
+The extension starts the `shelly-lsp` server for file-backed `.shelly` documents and communicates with it over standard input/output. The client uses the active document's workspace folder (or the sole folder in an ordinary single-folder workspace) for the server working directory and standard LSP workspace-root data. With no applicable folder it starts without a root and uses the extension host's working directory. Multi-root folder selection is intentionally not inferred. The verified shared capabilities are: diagnostics, contextual completion, hover, definition, references, document symbols, workspace symbols, and conservative rename. Completion covers Shelly commands and block directives, locally visible declarations and imported exports, result/error properties, HTTP and menu values, `formatDate` tokens, and relative `import`/`include` paths. Validation for recursive Shelly `**` file globs is provided by the server; the extension does not expand globs itself or execute Shelly scripts.
 
 Install the `shelly-lsp` executable separately and make sure it is available on your `PATH`. The extension uses `shelly-lsp` by default. To use a different executable or an absolute path, set `shelly.serverPath` in VS Code settings, for example:
 
@@ -93,7 +93,7 @@ Install dependencies and build the `.vsix` package (including production runtime
 npm ci
 npm run package
 npm run verify-package
-code --install-extension shelly-language-oficial-0.6.0.vsix
+code --install-extension shelly-language-oficial-0.6.2.vsix
 ```
 
 `npm run verify-package` inspects the resulting VSIX and fails unless the extension client and `vscode-languageclient` runtime entrypoint are present.
