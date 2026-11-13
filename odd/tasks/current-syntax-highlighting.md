@@ -7,16 +7,20 @@ Feature: update Shelly VS Code syntax highlighting and editor configuration for 
 - Add current `shell` and `shellin` built-ins to the TextMate grammar.
 - Remove legacy `$$CONSTANT` highlighting because current Shelly parsing rejects that syntax.
 - Improve semantic scopes for function names and dictionary keys where grammar structure permits.
-- Expand indentation patterns for current block constructs.
+- Expand indentation patterns for current block constructs, including `menu` / `end` blocks.
 - Add automated structural assertions for the changed grammar/configuration; a manual VS Code token-color check remains required for rendered theme colors.
 
 ## Tasks
 
 - [x] Add failing tests for current syntax highlighting and indentation coverage.
-- [x] Update grammar and language configuration.
+- [x] Update grammar and language configuration, including the final core menu contract.
 - [x] Run focused and full extension verification.
 - [x] Record manual VS Code validation requirements.
 - [x] Commit the extension fix.
+
+## Final menu syntax
+
+Menu highlighting is scoped to a `menu` / `end` block and covers only indented `keys numbers`, `keys letters lower`, `keys letters upper`, `option "..."`, `option[key] "..."`, and exact `shellout ""` blank rows. Obsolete menu-layout directives and `style color` / `style spacing` are intentionally not documented or highlighted as supported menu syntax.
 
 ## Evidence
 

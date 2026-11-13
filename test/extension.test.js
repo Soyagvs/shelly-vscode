@@ -70,13 +70,39 @@ test('surfaces language-server startup failures with an actionable message', () 
   assert.match(extensionSource, /serverPath|language server/i);
 });
 
-test('includes menu and contextual menu directives in builtin grammar rules and rejects choose', () => {
+test('keeps generic builtins separate from the menu-block contract', () => {
   const builtins = grammar.repository?.builtins?.patterns ?? [];
   const builtinMatch = builtins.map((pattern) => pattern.match ?? '').join('|');
-  for (const helper of ['shell', 'shellin', 'substring', 'padLeft', 'padRight', 'formatDate', 'menu', 'subtitle', 'theme', 'default', 'option', 'hint']) {
+  for (const helper of ['shell', 'shellin', 'substring', 'padLeft', 'padRight', 'formatDate']) {
     assert.ok(builtinMatch.includes(helper), `missing builtin helper: ${helper}`);
   }
-  assert.doesNotMatch(builtinMatch, /choose/);
+  for (const menuOnly of ['menu', 'option', 'shellout', 'keys', 'style', 'choose']) {
+    assert.doesNotMatch(builtinMatch, new RegExp(`\\b${menuOnly}\\b`));
+  }
+});
+
+test('scopes only the final core menu forms inside menu blocks', () => {
+  const menuRules = grammar.repository?.menu?.patterns ?? [];
+  assert.equal(menuRules.length, 1);
+  const menu = menuRules[0];
+  assert.match(menu.begin, /menu/);
+  assert.match(menu.end, /end/);
+  const command = menu.patterns.find((pattern) => pattern.name === 'support.function.menu.command.shelly');
+  assert.ok(command?.match, 'missing menu command rule');
+  const line = new RegExp(command.match);
+  for (const value of [
+    '  keys numbers',
+    '  keys letters lower',
+    '  keys letters upper',
+    '  option "Next"',
+    '  option[ok] "Next"',
+    '  shellout ""',
+  ]) assert.match(value, line);
+  for (const value of ['keys numbers', '  keys letters mixed', '  shellout "run"', '  style color "red"', '  style spacing 2', '  subtitle "Title"']) {
+    assert.doesNotMatch(value, line);
+  }
+  const builtinMatch = (grammar.repository?.builtins?.patterns ?? []).map((pattern) => pattern.match ?? '').join('|');
+  for (const obsolete of ['menu', 'option', 'shellout', 'keys', 'style']) assert.doesNotMatch(builtinMatch, new RegExp(`\\b${obsolete}\\b`));
 });
 
 test('highlights matches as a builtin predicate', () => {

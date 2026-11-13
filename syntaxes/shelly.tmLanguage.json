@@ -19,6 +19,9 @@
       "include": "#archive"
     },
     {
+      "include": "#menu"
+    },
+    {
       "include": "#mock"
     },
     {
@@ -124,6 +127,27 @@
         }
       ]
     },
+    "menu": {
+      "patterns": [
+        {
+          "name": "meta.menu.shelly",
+          "begin": "^\\s*menu\\b",
+          "end": "^\\s*end\\b",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "name": "support.function.menu.command.shelly",
+              "match": "^\\s+(?:keys\\s+(?:numbers|letters\\s+(?:lower|upper))|option(?:\\[[^\\]\\r\\n]+\\])?\\s+\\\"[^\\\"\\r\\n]*\\\"|shellout\\s+\\\"\\\")\\s*$"
+            },
+            {
+              "include": "#strings"
+            }
+          ]
+        }
+      ]
+    },
     "mock": {
       "patterns": [
         {
@@ -200,7 +224,7 @@
       "patterns": [
         {
           "name": "support.function.builtin.shelly",
-          "match": "\\bshell\\b|\\bshellin\\b|\\b(?:shellout|ask|menu|subtitle|theme|default|option|hint|command|arg|hasArg|args|exists|contains|files|create|copy|move|rename|remove|read|write|append|prepend|isFile|isDir|tempFile|tempDir|size|trim|lower|upper|replace|split|startsWith|endsWith|len|join|sort|reverse|unique|substring|padLeft|padRight|toNumber|toString|isEmpty|isNumber|isText|isList|isDict|keys|values|jsonParse|jsonStringify|basename|dirname|extension|withoutExtension|now|today|formatDate|random|randomInt|matches|watch|wait)\\b"
+          "match": "\\bshell\\b|\\bshellin\\b|\\b(?:ask|arg|hasArg|args|exists|contains|files|create|copy|move|rename|remove|read|write|append|prepend|isFile|isDir|tempFile|tempDir|size|trim|lower|upper|replace|split|startsWith|endsWith|len|join|sort|reverse|unique|substring|padLeft|padRight|toNumber|toString|isEmpty|isNumber|isText|isList|isDict|values|jsonParse|jsonStringify|basename|dirname|extension|withoutExtension|now|today|formatDate|random|randomInt|matches|watch|wait)\\b"
         }
       ]
     },

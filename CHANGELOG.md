@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0]
+
+- Highlight only the final Shelly menu block forms, including key modes, keyed options, and blank `shellout ""` rows.
+- Add `menu` block indentation and remove obsolete menu directives from generic builtins.
+
+[0.6.0]: https://github.com/Soyagvs/shelly-vscode/releases/tag/v0.6.0
+
 ## [0.5.0]
 
 - Added structured-automation keyword highlighting and indentation for `retry`, `pipeline`, and `parallel` blocks.
