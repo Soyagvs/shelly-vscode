@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.2]
+
+- Document `clear`, `progress`, and contextual Shelly LSP completion.
+
+[0.6.2]: https://github.com/Soyagvs/shelly-vscode/releases/tag/v0.6.2
+
 ## [0.6.1]
 
 - Add `clear` and `progress` syntax highlighting.
