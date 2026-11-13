@@ -73,7 +73,7 @@ test('surfaces language-server startup failures with an actionable message', () 
 test('keeps generic builtins separate from the menu-block contract', () => {
   const builtins = grammar.repository?.builtins?.patterns ?? [];
   const builtinMatch = builtins.map((pattern) => pattern.match ?? '').join('|');
-  for (const helper of ['shell', 'shellin', 'substring', 'padLeft', 'padRight', 'formatDate']) {
+  for (const helper of ['shell', 'shellin', 'clear', 'progress', 'substring', 'padLeft', 'padRight', 'formatDate']) {
     assert.ok(builtinMatch.includes(helper), `missing builtin helper: ${helper}`);
   }
   for (const menuOnly of ['menu', 'option', 'shellout', 'keys', 'style', 'choose']) {

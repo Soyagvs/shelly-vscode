@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1]
+
+- Add `clear` and `progress` syntax highlighting.
+- Use the purple Shelly file icon.
+
+[0.6.1]: https://github.com/Soyagvs/shelly-vscode/releases/tag/v0.6.1
+
 ## [0.6.0]
 
 - Highlight only the final Shelly menu block forms, including key modes, keyed options, and blank `shellout ""` rows.

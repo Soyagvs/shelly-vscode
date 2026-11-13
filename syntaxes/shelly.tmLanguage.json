@@ -224,7 +224,7 @@
       "patterns": [
         {
           "name": "support.function.builtin.shelly",
-          "match": "\\bshell\\b|\\bshellin\\b|\\b(?:ask|arg|hasArg|args|exists|contains|files|create|copy|move|rename|remove|read|write|append|prepend|isFile|isDir|tempFile|tempDir|size|trim|lower|upper|replace|split|startsWith|endsWith|len|join|sort|reverse|unique|substring|padLeft|padRight|toNumber|toString|isEmpty|isNumber|isText|isList|isDict|values|jsonParse|jsonStringify|basename|dirname|extension|withoutExtension|now|today|formatDate|random|randomInt|matches|watch|wait)\\b"
+          "match": "\\bshell\\b|\\bshellin\\b|\\b(?:ask|clear|progress|arg|hasArg|args|exists|contains|files|create|copy|move|rename|remove|read|write|append|prepend|isFile|isDir|tempFile|tempDir|size|trim|lower|upper|replace|split|startsWith|endsWith|len|join|sort|reverse|unique|substring|padLeft|padRight|toNumber|toString|isEmpty|isNumber|isText|isList|isDict|values|jsonParse|jsonStringify|basename|dirname|extension|withoutExtension|now|today|formatDate|random|randomInt|matches|watch|wait)\\b"
         }
       ]
     },
