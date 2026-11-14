@@ -20,7 +20,7 @@ This repository is separate from the Shelly runtime so users can clone, test, in
 ## Features
 
 - Registers the `shelly` language for `.shelly` files.
-- Adds TextMate syntax highlighting for comments, one-line and multiline strings, variables, constants, keywords, built-ins, structured automation (`retry`, `pipeline`, and `parallel`), core `menu` blocks (`keys numbers`, `keys letters lower|upper`, keyed or unkeyed `option`, and blank `shellout ""` rows), `clear`, `progress`, HTTP v1 commands and options, archive v1 commands and options, numbers, operators, arrows, dictionaries, nested access, and list selectors.
+- Adds TextMate syntax highlighting for Shelly commands, blocks, values, collections, strings, comments, and current features such as `clear`, `progress`, menus, structured automation, HTTP, and archives.
 - Adds bracket, comment, folding, auto-closing, surrounding-pair, and simple indentation configuration.
 - Connects `.shelly` files to the Shelly LSP v1 language server for editor language features and diagnostics.
 
@@ -29,22 +29,18 @@ This repository is separate from the Shelly runtime so users can clone, test, in
 
 This extension ships a `Shelly Icons` file icon theme that maps `.shelly` files to the Shelly logo. Select it with **Preferences: File Icon Theme** if VS Code does not enable it automatically.
 
-## Shelly v3.1 syntax coverage
-
-Highlighting includes current Shelly syntax such as `menu` blocks with indented `keys numbers`, `keys letters lower`, `keys letters upper`, `option "..."`, `option[key] "..."`, and exact `shellout ""` blank rows; it does not treat obsolete menu-layout directives or `style color` / `style spacing` as supported menu syntax. It also includes `arg`, `hasArg`, `args`, `case` / `when`, `try` / `catch`, structured automation blocks (`retry`, `pipeline`, and `parallel`), pipeline command-only forms such as `pipeline command ... end`, `log`, `watch <program> <args...> -> $line ... end`, bare `wait`, HTTP v1 `http` requests with `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`, and `OPTIONS`, plus `headers`, `body`, `timeout`, `maxBytes`, `httpPages`, `maxPages`, and `maxTotalBytes` options; archive v1 `archive` commands with `create`, `extract`, `checksum`, `check`, `from`, and `into`; text and date helpers, file helpers, JSON helpers, dictionaries, nested list/dictionary access, and triple-backtick multiline strings.
-
 ## Latest release
 
-Current version: **v0.6.2**
+Current version: **v0.6.3**
 
-Download `shelly-language-oficial-0.6.2.vsix` from the latest release:
+Download `shelly-language-oficial-0.6.3.vsix` from the latest release:
 
 <https://github.com/Soyagvs/shelly-vscode/releases/latest>
 
 Then install it with VS Code:
 
 ```sh
-code --install-extension shelly-language-oficial-0.6.2.vsix
+code --install-extension shelly-language-oficial-0.6.3.vsix
 ```
 
 Reload VS Code and open a `.shelly` file. The language mode in the bottom-right corner should say `Shelly`.
@@ -61,7 +57,7 @@ Install the `shelly-lsp` executable separately and make sure it is available on 
 }
 ```
 
-There is currently no formatting support. Use another formatter if you need formatted Shelly source.
+The LSP supports document formatting with the same safe transformations as `shelly fmt`.
 
 Language helper semantics and date formats are documented in the [canonical Shelly helper docs](https://github.com/Soyagvs/shelly/blob/main/docs/helpers.md) and [date-formatting docs](https://github.com/Soyagvs/shelly/blob/main/docs/date-formatting.md).
 
@@ -93,7 +89,7 @@ Install dependencies and build the `.vsix` package (including production runtime
 npm ci
 npm run package
 npm run verify-package
-code --install-extension shelly-language-oficial-0.6.2.vsix
+code --install-extension shelly-language-oficial-0.6.3.vsix
 ```
 
 `npm run verify-package` inspects the resulting VSIX and fails unless the extension client and `vscode-languageclient` runtime entrypoint are present.

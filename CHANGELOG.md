@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.3]
+
+- Simplify and correct the extension README, including LSP formatting support.
+
+[0.6.3]: https://github.com/Soyagvs/shelly-vscode/releases/tag/v0.6.3
+
 ## [0.6.2]
 
 - Document `clear`, `progress`, and contextual Shelly LSP completion.
