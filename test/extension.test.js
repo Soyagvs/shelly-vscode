@@ -237,9 +237,26 @@ test('defines table blocks, commands, and border values without matching strings
   assert.ok(grammar.patterns.findIndex((pattern) => pattern.include === '#table') > grammar.patterns.findIndex((pattern) => pattern.include === '#strings'));
 });
 
-test('indents table blocks in language configuration', () => {
+test('indents table and measure blocks in language configuration', () => {
   const increase = languageConfiguration.indentationRules?.increaseIndentPattern ?? '';
-  assert.match(increase, /\\btable\\b/);
+  for (const keyword of ['table', 'measure']) assert.match(increase, new RegExp(`\\\\b${keyword}\\\\b`));
+});
+
+test('defines measure blocks with milliseconds and composable table control-flow grammar', () => {
+  const measureRules = grammar.repository?.measure?.patterns ?? [];
+  assert.equal(measureRules.length, 1);
+  const measure = measureRules[0];
+  assert.equal(measure.name, 'meta.measure.shelly');
+  assert.match(measure.begin, /measure/);
+  assert.match(measure.begin, /\\\$milliseconds/);
+  assert.match(measure.end, /end/);
+  const table = grammar.repository?.table?.patterns?.[0];
+  const includes = table?.patterns?.filter((pattern) => pattern.include).map((pattern) => pattern.include) ?? [];
+  assert.ok(includes.includes('#controlFlow'));
+  assert.ok(includes.includes('#comments'));
+  assert.ok(includes.includes('#strings'));
+  const flow = grammar.repository?.controlFlow?.patterns ?? [];
+  assert.ok(flow.some((pattern) => pattern.name === 'keyword.control.shelly'));
 });
 
 test('defines HTTP v1 commands, methods, and options without matching variables', () => {

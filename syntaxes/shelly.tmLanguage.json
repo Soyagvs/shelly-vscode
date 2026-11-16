@@ -13,6 +13,9 @@
       "include": "#table"
     },
     {
+      "include": "#measure"
+    },
+    {
       "include": "#functionNames"
     },
     {
@@ -116,6 +119,12 @@
               "include": "#strings"
             },
             {
+              "include": "#controlFlow"
+            },
+            {
+              "include": "#variables"
+            },
+            {
               "name": "support.function.table.command.shelly",
               "match": "(?<![$A-Za-z0-9_])(?:column|row|footer|border)(?![A-Za-z0-9_])"
             },
@@ -124,6 +133,43 @@
               "match": "(?<![$A-Za-z0-9_])(?:ascii|unicode|rounded)(?![A-Za-z0-9_])"
             }
           ]
+        }
+      ]
+    },
+    "measure": {
+      "patterns": [
+        {
+          "name": "meta.measure.shelly",
+          "begin": "^\\s*measure\\s*->\\s*\\$milliseconds\\b",
+          "end": "^\\s*end\\b",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#strings"
+            },
+            {
+              "include": "#controlFlow"
+            },
+            {
+              "include": "#variables"
+            }
+          ]
+        }
+      ]
+    },
+    "controlFlow": {
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "name": "keyword.control.shelly",
+          "match": "\\b(?:fn|end|if|elif|else|case|when|repeat|while|for|in|try|catch|retry|pipeline|parallel|log|call|return|break|continue|and|or|not|global|export|import|include|exit)\\b"
         }
       ]
     },
