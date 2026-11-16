@@ -214,6 +214,34 @@ test('defines mock and secret commands with target subcommands without matching 
   assert.ok(grammar.patterns.findIndex((pattern) => pattern.include === '#mock') < grammar.patterns.findIndex((pattern) => pattern.include === '#variables'));
 });
 
+test('defines table blocks, commands, and border values without matching strings or comments', () => {
+  const tableRules = grammar.repository?.table?.patterns ?? [];
+  assert.equal(tableRules.length, 1);
+  const table = tableRules[0];
+  assert.equal(table.name, 'meta.table.shelly');
+  assert.match(table.begin, /table/);
+  assert.match(table.end, /end/);
+  const includes = table.patterns.filter((pattern) => pattern.include).map((pattern) => pattern.include);
+  assert.deepEqual(includes.slice(0, 2), ['#comments', '#strings']);
+  const commandRule = table.patterns.find((pattern) => pattern.name === 'support.function.table.command.shelly');
+  const valueRule = table.patterns.find((pattern) => pattern.name === 'constant.language.table.border.shelly');
+  assert.ok(commandRule?.match, 'missing table command rule');
+  assert.ok(valueRule?.match, 'missing table border value rule');
+  const command = new RegExp(commandRule.match);
+  for (const value of ['column', 'row', 'footer', 'border']) assert.match(value, command);
+  for (const value of ['table', 'columnName', '$column']) assert.doesNotMatch(value, command);
+  const border = new RegExp(valueRule.match);
+  for (const value of ['ascii', 'unicode', 'rounded']) assert.match(value, border);
+  for (const value of ['asciiValue', '$ascii']) assert.doesNotMatch(value, border);
+  assert.ok(grammar.patterns.some((pattern) => pattern.include === '#table'));
+  assert.ok(grammar.patterns.findIndex((pattern) => pattern.include === '#table') > grammar.patterns.findIndex((pattern) => pattern.include === '#strings'));
+});
+
+test('indents table blocks in language configuration', () => {
+  const increase = languageConfiguration.indentationRules?.increaseIndentPattern ?? '';
+  assert.match(increase, /\\btable\\b/);
+});
+
 test('defines HTTP v1 commands, methods, and options without matching variables', () => {
   const httpRules = grammar.repository?.http?.patterns ?? [];
   assert.equal(httpRules.length, 2);
