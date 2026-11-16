@@ -10,6 +10,9 @@
       "include": "#strings"
     },
     {
+      "include": "#table"
+    },
+    {
       "include": "#functionNames"
     },
     {
@@ -94,6 +97,31 @@
             {
               "name": "variable.other.interpolation.shelly",
               "match": "\\$[A-Za-z][A-Za-z0-9_]*(?:\\[[^\\]\\r\\n]*\\]|\\.[A-Za-z][A-Za-z0-9_]*)*"
+            }
+          ]
+        }
+      ]
+    },
+    "table": {
+      "patterns": [
+        {
+          "name": "meta.table.shelly",
+          "begin": "^\\s*table\\b",
+          "end": "^\\s*end\\b",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#strings"
+            },
+            {
+              "name": "support.function.table.command.shelly",
+              "match": "(?<![$A-Za-z0-9_])(?:column|row|footer|border)(?![A-Za-z0-9_])"
+            },
+            {
+              "name": "constant.language.table.border.shelly",
+              "match": "(?<![$A-Za-z0-9_])(?:ascii|unicode|rounded)(?![A-Za-z0-9_])"
             }
           ]
         }
