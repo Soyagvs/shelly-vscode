@@ -10,6 +10,9 @@
       "include": "#strings"
     },
     {
+      "include": "#blockOutput"
+    },
+    {
       "include": "#table"
     },
     {
@@ -65,6 +68,22 @@
     }
   ],
   "repository": {
+    "blockOutput": {
+      "patterns": [
+        {
+          "name": "meta.block.output.shelly",
+          "match": "(->)(\\s*)(\\$[A-Za-z][A-Za-z0-9_]*(?:\\[[^\\]\\r\\n]*\\]|\\.[A-Za-z][A-Za-z0-9_]*)*)",
+          "captures": {
+            "1": {
+              "name": "keyword.operator.arrow.shelly"
+            },
+            "3": {
+              "name": "variable.other.shelly"
+            }
+          }
+        }
+      ]
+    },
     "comments": {
       "patterns": [
         {
