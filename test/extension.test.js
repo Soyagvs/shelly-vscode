@@ -242,6 +242,29 @@ test('indents table and measure blocks in language configuration', () => {
   for (const keyword of ['table', 'measure']) assert.match(increase, new RegExp(`\\\\b${keyword}\\\\b`));
 });
 
+test('highlights block output destinations while preserving arrows and precedence', () => {
+  const output = grammar.repository?.blockOutput?.patterns ?? [];
+  assert.equal(output.length, 1);
+  const rule = output[0];
+  assert.equal(rule.name, 'meta.block.output.shelly');
+  assert.match(rule.match, /->/);
+  assert.ok(rule.match.includes('\\$[A-Za-z]'));
+  assert.equal(rule.captures?.['1']?.name, 'keyword.operator.arrow.shelly');
+  assert.equal(rule.captures?.['3']?.name, 'variable.other.shelly');
+  assert.ok(grammar.patterns.findIndex((pattern) => pattern.include === '#blockOutput') > grammar.patterns.findIndex((pattern) => pattern.include === '#strings'));
+  for (const value of ['table rows -> $rows', 'if ok -> $result', 'for item in items -> $items', 'fn build -> $output']) {
+    assert.match(value, new RegExp(rule.match));
+  }
+  assert.ok(grammar.patterns.findIndex((pattern) => pattern.include === '#comments') < grammar.patterns.findIndex((pattern) => pattern.include === '#blockOutput'));
+  assert.ok(grammar.patterns.findIndex((pattern) => pattern.include === '#strings') < grammar.patterns.findIndex((pattern) => pattern.include === '#blockOutput'));
+});
+
+test('indents universal block output constructs', () => {
+  const increase = languageConfiguration.indentationRules?.increaseIndentPattern ?? '';
+  for (const keyword of ['fn', 'if', 'for', 'table']) assert.match(increase, new RegExp(`\\\\b${keyword}\\\\b`));
+  assert.ok(increase.includes('->\\s*\\$[A-Za-z]'));
+});
+
 test('defines measure blocks with milliseconds and composable table control-flow grammar', () => {
   const measureRules = grammar.repository?.measure?.patterns ?? [];
   assert.equal(measureRules.length, 1);
