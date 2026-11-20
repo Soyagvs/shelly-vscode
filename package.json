@@ -2,7 +2,7 @@
   "name": "shelly-language-oficial",
   "displayName": "Shelly Language Oficial",
   "description": "VS Code language support for Shelly .shelly scripts.",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "publisher": "AGUSTINGABRIELMARTINEZ",
   "icon": "icons/shelly.png",
   "license": "GPL-3.0-or-later",
