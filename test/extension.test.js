@@ -70,8 +70,8 @@ test('surfaces language-server startup failures with an actionable message', () 
   assert.match(extensionSource, /serverPath|language server/i);
 });
 
-test('keeps generic builtins separate from the menu-block contract', () => {
-  const builtins = grammar.repository?.builtins?.patterns ?? [];
+test('keeps generic commands and predicates separate from the menu-block contract', () => {
+  const builtins = [...(grammar.repository?.commands?.patterns ?? []), ...(grammar.repository?.predicates?.patterns ?? [])];
   const builtinMatch = builtins.map((pattern) => pattern.match ?? '').join('|');
   for (const helper of ['shell', 'shellin', 'clear', 'progress', 'substring', 'padLeft', 'padRight', 'formatDate']) {
     assert.ok(builtinMatch.includes(helper), `missing builtin helper: ${helper}`);
@@ -101,12 +101,12 @@ test('scopes only the final core menu forms inside menu blocks', () => {
   for (const value of ['keys numbers', '  keys letters mixed', '  shellout "run"', '  style color "red"', '  style spacing 2', '  subtitle "Title"']) {
     assert.doesNotMatch(value, line);
   }
-  const builtinMatch = (grammar.repository?.builtins?.patterns ?? []).map((pattern) => pattern.match ?? '').join('|');
+  const builtinMatch = [...(grammar.repository?.commands?.patterns ?? []), ...(grammar.repository?.predicates?.patterns ?? [])].map((pattern) => pattern.match ?? '').join('|');
   for (const obsolete of ['menu', 'option', 'shellout', 'keys', 'style']) assert.doesNotMatch(builtinMatch, new RegExp(`\\b${obsolete}\\b`));
 });
 
 test('highlights matches as a builtin predicate', () => {
-  const builtinMatch = (grammar.repository?.builtins?.patterns ?? []).map((pattern) => pattern.match ?? '').join('|');
+  const builtinMatch = [...(grammar.repository?.commands?.patterns ?? []), ...(grammar.repository?.predicates?.patterns ?? [])].map((pattern) => pattern.match ?? '').join('|');
   assert.match(builtinMatch, /matches/);
 });
 
@@ -161,13 +161,26 @@ test('allows pipeline to open with a command directly, without requiring shell',
 });
 
 test('highlights watch as a builtin command', () => {
-  const builtinMatch = (grammar.repository?.builtins?.patterns ?? []).map((pattern) => pattern.match ?? '').join('|');
+  const builtinMatch = [...(grammar.repository?.commands?.patterns ?? []), ...(grammar.repository?.predicates?.patterns ?? [])].map((pattern) => pattern.match ?? '').join('|');
   assert.match(builtinMatch, /watch/);
 });
 
 test('highlights wait as a builtin command', () => {
-  const builtinMatch = (grammar.repository?.builtins?.patterns ?? []).map((pattern) => pattern.match ?? '').join('|');
+  const builtinMatch = [...(grammar.repository?.commands?.patterns ?? []), ...(grammar.repository?.predicates?.patterns ?? [])].map((pattern) => pattern.match ?? '').join('|');
   assert.match(builtinMatch, /wait/);
+});
+
+test('audits token families and parser-compatible numeric signs', () => {
+  assert.ok(grammar.repository?.constants?.patterns?.some((pattern) => pattern.name === 'constant.language.shelly'));
+  assert.ok(grammar.repository?.variables?.patterns?.some((pattern) => pattern.match.includes('\\$[a-z]')));
+  assert.ok(grammar.repository?.punctuation?.patterns?.length);
+  const number = grammar.repository?.numbers?.patterns?.[0]?.match;
+  assert.ok(number);
+  const numeric = new RegExp(`^(?:${number})$`);
+  assert.match('-12.5', numeric);
+  assert.match('12.5', numeric);
+  assert.doesNotMatch('+12.5', numeric);
+  assert.doesNotMatch('12-5', numeric);
 });
 
 test('defines archive v1 commands and options without matching variables or unrelated commands', () => {

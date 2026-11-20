@@ -37,13 +37,19 @@
       "include": "#dictionaryKeys"
     },
     {
+      "include": "#constants"
+    },
+    {
       "include": "#variables"
     },
     {
       "include": "#keywords"
     },
     {
-      "include": "#builtins"
+      "include": "#commands"
+    },
+    {
+      "include": "#predicates"
     },
     {
       "include": "#booleans"
@@ -65,6 +71,9 @@
     },
     {
       "include": "#brackets"
+    },
+    {
+      "include": "#punctuation"
     }
   ],
   "repository": {
@@ -301,7 +310,7 @@
       "patterns": [
         {
           "name": "variable.other.shelly",
-          "match": "\\$[A-Za-z][A-Za-z0-9_]*(?:\\[[^\\]\\r\\n]*\\]|\\.[A-Za-z][A-Za-z0-9_]*)*\\b"
+          "match": "\\$[a-z][A-Za-z0-9_]*(?:\\[[^\\]\\r\\n]*\\]|\\.[A-Za-z][A-Za-z0-9_]*)*\\b"
         }
       ]
     },
@@ -313,11 +322,27 @@
         }
       ]
     },
-    "builtins": {
+    "commands": {
       "patterns": [
         {
-          "name": "support.function.builtin.shelly",
-          "match": "\\bshell\\b|\\bshellin\\b|\\b(?:ask|clear|progress|arg|hasArg|args|exists|contains|files|create|copy|move|rename|remove|read|write|append|prepend|isFile|isDir|tempFile|tempDir|size|trim|lower|upper|replace|split|startsWith|endsWith|len|join|sort|reverse|unique|substring|padLeft|padRight|toNumber|toString|isEmpty|isNumber|isText|isList|isDict|values|jsonParse|jsonStringify|basename|dirname|extension|withoutExtension|now|today|formatDate|random|randomInt|matches|watch|wait)\\b"
+          "name": "support.function.command.shelly",
+          "match": "\\b(?:shell|shellin|ask|clear|progress|arg|args|files|create|copy|move|rename|remove|read|write|append|prepend|tempFile|tempDir|trim|lower|upper|replace|split|join|sort|reverse|unique|substring|padLeft|padRight|toNumber|toString|values|jsonParse|jsonStringify|basename|dirname|extension|withoutExtension|now|today|formatDate|random|randomInt|watch|wait)\\b"
+        }
+      ]
+    },
+    "predicates": {
+      "patterns": [
+        {
+          "name": "support.function.predicate.shelly",
+          "match": "\\b(?:hasArg|exists|contains|isFile|isDir|startsWith|endsWith|len|isEmpty|isNumber|isText|isList|isDict|matches)\\b"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.shelly",
+          "match": "\\$[A-Z][A-Z0-9_]*\\b"
         }
       ]
     },
@@ -333,7 +358,7 @@
       "patterns": [
         {
           "name": "constant.numeric.shelly",
-          "match": "(?<![A-Za-z0-9_])[-+]?(?:\\d+\\.\\d+|\\d+)(?![A-Za-z0-9_])"
+          "match": "(?<![A-Za-z0-9_])-?(?:\\d+\\.\\d+|\\d+)(?![A-Za-z0-9_])"
         }
       ]
     },
@@ -396,6 +421,18 @@
         {
           "name": "punctuation.definition.bracket.shelly",
           "match": "[\\[\\]{}()]"
+        }
+      ]
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "name": "punctuation.separator.shelly",
+          "match": "[,;:]"
+        },
+        {
+          "name": "punctuation.accessor.shelly",
+          "match": "\\."
         }
       ]
     }
